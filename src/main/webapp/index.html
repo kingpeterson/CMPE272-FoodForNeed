@@ -1,22 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Java DB Sample Application</title>
+<title>Food For the Need</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport"
 	content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <link rel="stylesheet" href="style.css" />
 <link rel="stylesheet" href="layout.css" />
+<style type="text/css">
+	#map-canvas { height: 50%; margin: 0; padding: 0;}
+</style>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJPap5AruRVqZwxDQBZ8cZoaIv-Nu-srY">
+</script>
+<script type="text/javascript">
+      function initialize() {
+        var mapOptions = {
+          center: { lat: 37.433, lng: -121.978},
+          zoom: 11
+        };
+        var map = new google.maps.Map(
+            document.getElementById('map-canvas'),
+            mapOptions);
+      }
+      google.maps.event.addDomListener(
+          window, 'load', initialize);
+</script>	
 </head>
 <body >
 	<div class = "leftHalf">
-<img class = "newappIcon" src="images/food-box.jpg" />
+	<img class = "newappIcon" src="images/food-box.jpg" />
 				<h1>
 					Welcome to the <span class="blue">Food for the Need</span>
 				</h1>
 				<!--<p class = "description">Get started by reading our <a href = "https://www.ng.bluemix.net/docs/#starters/liberty/index.html#liberty">Java documentation</a> or use the Start Coding guide under your app in your dashboard.</p> -->
 				<p class="description>">Our goal is to eliminate food waste and use it to feed the hungry people.</p>
+	<div id="map-canvas"></div>	
 	</div>
 	<div class = "rightHalf">
 	<div class = "center">
@@ -92,7 +111,6 @@
 				-->
 				<script type="text/javascript" src="util.js"></script> 
 				<script type="text/javascript" src="index.js"></script>
-					
 					</div>
 					
 </div>
