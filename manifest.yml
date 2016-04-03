@@ -1,0 +1,10 @@
+applications:
+- path: target/JavaDBApp.war
+  memory: 512M
+  instances: 1
+  domain: mybluemix.net
+  name: Food for Need
+  host: Food-for-Need
+  disk_quota: 1024M
+  services:
+  - Food for Need-sqldb
