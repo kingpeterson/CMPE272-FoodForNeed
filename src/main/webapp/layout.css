@@ -1,4 +1,3 @@
-@CHARSET "UTF-8";
 * {
     margin: 0;
     padding: 0;
@@ -9,8 +8,8 @@
 	}
 
 	body {
-		width: 100%;
-		height: 100%;
+		width: 110%;
+		height: 110%;
 		font-family: "helvetica neue", helvetica, arial, sans-serif;
 		font-size: 13px;
 		text-align: center;
@@ -78,8 +77,8 @@
 	.round:hover {
 		width: 130%;
 		height: 130%;
-		left: -15%;
-		top: -15%;
+		left: -20%;
+		top: -20%;
 		font-size: 33px;
 		padding-top: 38px;
 		-webkit-box-shadow: 5px 5px 10px rgba(0,0,0,.3);
