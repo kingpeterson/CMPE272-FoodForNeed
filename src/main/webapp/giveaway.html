@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Food For the Need</title>
+<title>Request Food</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport"
 	content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="style.css" />
 <link rel="stylesheet" href="layout.css" />
+<link rel="stylesheet" href="table.css" />
+
 <style type="text/css">
 	#map-canvas { height: 50%; margin: 0; padding: 0;}
 </style>
+<!-- 
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJPap5AruRVqZwxDQBZ8cZoaIv-Nu-srY">
 </script>
 <script type="text/javascript">
@@ -26,6 +32,7 @@
       google.maps.event.addDomListener(
           window, 'load', initialize);
 </script>	
+-->
 </head>
 <body >
 	<div class = "leftHalf">
@@ -41,27 +48,27 @@
 	<div class = "center">
 	<header>
 					<div class='title' id='Title Page'>
-						Join Us to Feed the Hungry
-						<!--  <button class='detailBtn' onclick="toggleServiceInfo()"
-							title='toggle service info'> Details on Us
-						</button>
-						-->
+						Reduce Food Waste, start giving away TODAY!
 					</div>
-					<div class='title' id='Button'>
-						<li><a onclick="toggleServiceInfo()" class="round yellow">About Us
-					 	<span class="round">Learn more about us</span></a></li>
-					 	<li><a onclick="requestFood()" class="round blue">Request Food
-					 	<span class="round">Request food for a food shelter.</span></a></li>
-					 	<li><a href="giveaway.html" class="round red">Send Food
-					 	<span class="round">Send food to a food shelter.</span></a></li>
-						<!-- 
-						<button class='round blue' onclick="" title='Request Food'>Request Food
-						<span class="round">But only if you really, really want to. </span>
-						</button>
-						<button class='sendBtn' onclick="" title='Send Food'>Send Food
-						</button>
-						-->
+					<div class='title' id='table'>
+						<table>
+						  <thead>
+						    <tr>
+						      <th>Market Name</th>
+						      <th>Phone</th>
+						      <th>Location</th>
+						    </tr>
+						  </thead>
+						  <tbody>
+						    <tr>
+						      <td id='marketName'><strong></strong></td>
+						      <td id='marketPhone'></td>
+						      <td id='marketAddress'></td>
+						    </tr>
+						  </tbody>
+						</table>
 					</div>
+					<a href="index.html" class="btn btn-info" role="button">Back</a>
 				</header>
 				<!-- 
 				<section id='dbserviceinfo' style='display: none;'>

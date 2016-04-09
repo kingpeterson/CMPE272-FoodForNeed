@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Food For the Need</title>
+<title>Request Food</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport"
 	content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no" />
@@ -11,6 +11,7 @@
 <style type="text/css">
 	#map-canvas { height: 50%; margin: 0; padding: 0;}
 </style>
+<!-- 
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJPap5AruRVqZwxDQBZ8cZoaIv-Nu-srY">
 </script>
 <script type="text/javascript">
@@ -26,6 +27,7 @@
       google.maps.event.addDomListener(
           window, 'load', initialize);
 </script>	
+-->
 </head>
 <body >
 	<div class = "leftHalf">
@@ -41,26 +43,15 @@
 	<div class = "center">
 	<header>
 					<div class='title' id='Title Page'>
-						Join Us to Feed the Hungry
-						<!--  <button class='detailBtn' onclick="toggleServiceInfo()"
-							title='toggle service info'> Details on Us
-						</button>
-						-->
+						Request food for your organization
 					</div>
 					<div class='title' id='Button'>
 						<li><a onclick="toggleServiceInfo()" class="round yellow">About Us
 					 	<span class="round">Learn more about us</span></a></li>
 					 	<li><a onclick="requestFood()" class="round blue">Request Food
 					 	<span class="round">Request food for a food shelter.</span></a></li>
-					 	<li><a href="giveaway.html" class="round red">Send Food
+					 	<li><a onclick="sendFood()" class="round red">Send Food
 					 	<span class="round">Send food to a food shelter.</span></a></li>
-						<!-- 
-						<button class='round blue' onclick="" title='Request Food'>Request Food
-						<span class="round">But only if you really, really want to. </span>
-						</button>
-						<button class='sendBtn' onclick="" title='Send Food'>Send Food
-						</button>
-						-->
 					</div>
 				</header>
 				<!-- 
