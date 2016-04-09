@@ -1,4 +1,4 @@
-package example.jpa;
+package restful.jpa;
 
 import java.util.List;
 

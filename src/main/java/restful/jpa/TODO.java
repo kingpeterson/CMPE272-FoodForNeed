@@ -1,4 +1,4 @@
-package example.jpa;
+package restful.jpa;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;

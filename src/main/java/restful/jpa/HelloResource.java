@@ -1,4 +1,4 @@
-package example.jpa;
+package restful.jpa;
 
 import java.io.IOException;
 import java.util.Set;
