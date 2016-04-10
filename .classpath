@@ -31,5 +31,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="/Volumes/Data/Downloads/nosqljson.jar"/>
+	<classpathentry kind="lib" path="/Volumes/Data/Downloads/db2jcc.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

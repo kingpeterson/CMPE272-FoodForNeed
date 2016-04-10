@@ -2,7 +2,9 @@
 
 var REST_DATA = 'api/todolist';
 var REST_ENV = 'api/dbinfo';
+var SQL_CONN = 'api/sqldatabase';
 var KEY_ENTER = 13;
+
 
 function loadItems(){
 	xhrGet(REST_DATA, function(data){
