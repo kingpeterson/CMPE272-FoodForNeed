@@ -3,8 +3,7 @@ var REST_ENV = 'api/dbinfo';
 
 function loadDatabase(){
 	xhrGet(REST_DATA, function(data){
-		document.getElementById("loading").innerHTML = "";
-		var receivedItems = data.body || {};
+		var receivedItems = data.body || [];
 		var items = [];
 		var i;		
 		// Make sure the received items have correct format
@@ -22,7 +21,6 @@ function loadDatabase(){
 		}
 	}, function(err){
 		console.error(err);
-		document.getElementById("loading").innerHTML = "ERROR";
 	});
 }
 /*
@@ -51,19 +49,25 @@ function addItem(item, isNew){
 	if(id){
 		row.setAttribute('data-id', id);
 	}
-//	row.innerHTML = "<td><strong></strong></td>"+
-//    				"<td></td>"+
-//    				"<td></td>"+
+	row.innerHTML = "<td id=marketName"+id+"><strong></strong></td>" +
+					"<td id=marketPhone"+id+"></td>"+
+					"<td id=marketAddress"+id+"></td>";
 //    				"<td class='deleteBtn' onclick='deleteItem(this)' title='delete me'></td>";
 	var table = document.getElementById('marketList');
 	table.appendChild(row);
-	if(item){
+	document.getElementById('marketName'+id).innerHTML = item.name;
+	document.getElementById('marketPhone'+id).innerHTML = item.phone;
+	document.getElementById('marketAddress'+id).innerHTML = item.addressLine1 + ", " + item.city + " " + item.state +
+	" " + item.postalCode;
+	
+//	if(item){
+		
+//		document.getElementById('marketName'+id).innerHTML = item.name;
+//		document.getElementById('marketPhone'+id).innerHTML = item.phone;
+//		document.getElementById('marketAddress'+id).innerHTML = item.addressLine1 + ", " + item.city + " " + item.state +
+//		" " + item.postalCode;
+		
 		/*
-		document.getElementById('marketName').innerHTML = item.name;
-		document.getElementById('marketPhone').innerHTML = item.phone;
-		document.getElementById('marketAddress').innerHTML = item.addressLine1 + ", " + item.city + " " + item.state +
-		" " + item.postalCode;
-		*/
 		var name = document.createElement('td');
 		var phone = document.createElement('td');
 		var address = document.createElement('td');
@@ -77,8 +81,9 @@ function addItem(item, isNew){
 		name.appendChild(marketName);
 		phone.appendChild(marketPhone);
 		address.appendChild(marketAddress);
-		
-	}
+		*/
+//	}
+
 	row.isNew = !item || isNew;
 }
 
@@ -127,14 +132,6 @@ function saveChange(contentNode, callback){
 	}
 }
 
-/*
-function addItem(item, isNew){
-	console.log(item);
-	document.getElementById('marketName').innerHTML = item.toJSON().name;
-	document.getElementById('marketPhone').innerHTML = item.toJSON().phone;
-	document.getElementById('marketAddress').innerHTML = item.toJSON().addressLine1 + item.toJSON().addressLine2;
-}
-*/
 function updateServiceInfo(){
 	xhrGet(REST_ENV, function(dbinfo){
 		
@@ -143,26 +140,4 @@ function updateServiceInfo(){
 	});
 }
 
-function update(){
-	document.getElementById('marketName').innerHTML = "Safeway";
-	document.getElementById('marketPhone').innerHTML = "626-461-2922";
-	document.getElementById('marketAddress').innerHTML = "674 Modern Ice Dr.";
-}
-/*
-xhrGet(REST_ENV, function(dbinfo){
-
-	console.log(dbinfo);
-	document.getElementById('envServiceName').innerHTML = dbinfo.name;
-	document.getElementById('envDbName').innerHTML = dbinfo.db;
-	document.getElementById('envHost').innerHTML = dbinfo.host;
-	document.getElementById('envPort').innerHTML = dbinfo.port;
-	document.getElementById('envUrl').innerHTML = dbinfo.jdbcurl;
-
-
-}, function(err){
-console.error(err);
-});
-*/
-//updateServiceInfo();
 loadDatabase();
-//update();

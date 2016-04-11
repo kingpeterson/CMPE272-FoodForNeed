@@ -35,7 +35,7 @@ public class Product {
 
 	@Basic
 	@Column(name = "productVendor")
-	Int productVendor;
+	Integer productVendor;
 	
 	@Basic
 	@Column(name = "productDescription")
@@ -43,7 +43,7 @@ public class Product {
 	
 	@Basic
 	@Column(name = "quantityInStock")
-	String quantityInStock;
+	Integer quantityInStock;
 	
 	public long getId() {
 		return id;
@@ -77,11 +77,11 @@ public class Product {
 		this.productScale = productScale;
 	}
 	
-	public Int getProductVendor() {
+	public Integer getProductVendor() {
 		return productVendor;
 	}
 
-	public void setProductVendor(Double productVendor) {
+	public void setProductVendor(Integer productVendor) {
 		this.productVendor = productVendor;
 	}
 	
@@ -93,11 +93,11 @@ public class Product {
 		this.productDescription = productDescription;
 	}
 	
-	public Int getQuantityInStock() {
+	public Integer getQuantityInStock() {
 		return quantityInStock;
 	}
 
-	public void setQuantityInStock(String quantityInStock) {
+	public void setQuantityInStock(Integer quantityInStock) {
 		this.quantityInStock = quantityInStock;
 	}
 	
