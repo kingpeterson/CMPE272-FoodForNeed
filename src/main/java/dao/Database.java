@@ -35,14 +35,14 @@ public class Database {
 
 	@POST
 	public Response create(@FormParam("name") String name) {
-		/*
-		TODO todo = new TODO();
-		todo.setName(name);
+		
+		Market market = new Market();
+		market.setName(name);
 		try {
 			utx.begin();
-			em.persist(todo);
+			em.persist(market);
 			utx.commit();
-			return Response.ok(todo.toString()).build();
+			return Response.ok(market.toString()).build();
 		} catch (Exception e) {
 			e.printStackTrace();			
 			return Response.status(javax.ws.rs.core.Response.Status.INTERNAL_SERVER_ERROR).build();
@@ -55,18 +55,17 @@ public class Database {
 				e.printStackTrace();
 			}
 		}
-		*/
-		return Response.ok().build();
+		
 	}
 
 	@DELETE
 	public Response delete(@QueryParam("id") long id) {
-		/*
+		
 		try {
 			utx.begin();
-			TODO todo = em.find(TODO.class, id);
-			if (todo != null) {
-				em.remove(todo);
+			Market market = em.find(Market.class, id);
+			if (market != null) {
+				em.remove(market);
 				utx.commit();
 				return Response.ok().build();
 			} else {
@@ -84,19 +83,18 @@ public class Database {
 				e.printStackTrace();
 			}
 		}
-		*/
-		return Response.ok().build();
+		
 	}
 
 	@PUT
 	public Response update(@FormParam("id") long id, @FormParam("name") String name) {
-		/*
+		
 		try {
 			utx.begin();
-			TODO todo = em.find(TODO.class, id);
-			if (todo != null) {
-				todo.setName(name);// TODO check if null
-				em.merge(todo);
+			Market market = em.find(Market.class, id);
+			if (market != null) {
+				market.setName(name);// TODO check if null
+				em.merge(market);
 				utx.commit();
 				return Response.ok().build();
 			} else {
@@ -114,10 +112,9 @@ public class Database {
 				e.printStackTrace();
 			}
 		}
-		*/
-		return Response.ok().build();
+		
 	}
-
+	/*
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response get(@QueryParam("id") long id) {
@@ -130,7 +127,6 @@ public class Database {
 			System.out.println(json);
 			System.out.println(Response.ok(json).build());
 			return Response.ok(json).build();
-//			return Response.status(200).entity(json).build();
 		}
 		Market market = null;
 		try {
@@ -156,6 +152,46 @@ public class Database {
 		}
 		else
 			return Response.status(javax.ws.rs.core.Response.Status.NOT_FOUND).build();
+	}
+	
+	*/
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public String get(@QueryParam("id") long id) {
+		if (id == 0) {
+			List<Market> list = em.createQuery("SELECT t FROM Market t", Market.class).getResultList();
+			//TODO use JSON util like Gson to render objects and use REST Response Writer
+			String json = "{\"id\":\"all\", \"body\":" + list.toString() + "}";
+//			System.out.println(list.toString());
+			System.out.println("I am at id == 0");
+			System.out.println(json);
+			return json;
+		}
+		Market market = null;
+		try {
+			utx.begin();
+			market = em.find(Market.class, id);
+			utx.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "INTERNAL SERVER ERROR";
+		} finally {
+			try {
+				if (utx.getStatus() == javax.transaction.Status.STATUS_ACTIVE) {
+					utx.rollback();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		if (market != null){
+			System.out.println("I am at found");
+			System.out.println(market.toString());
+			return market.toString();
+		}
+		else
+			return "NOT FOUND";
 	}
 	/*
 	public void populateDB() {
