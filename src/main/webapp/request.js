@@ -1,4 +1,4 @@
-var REST_DATA = 'api//marketDao';
+var REST_DATA = 'api//customerDao';
 var REST_ENV = 'api/dbinfo';
 
 function loadDatabase(){
@@ -49,17 +49,17 @@ function addItem(item, isNew){
 	if(id){
 		row.setAttribute('data-id', id);
 	}
-	row.innerHTML = "<td id=marketName"+id+"><strong></strong></td>" +
-					"<td id=marketPhone"+id+"></td>"+
-					"<td id=marketAddress"+id+"></td>";
+	row.innerHTML = "<td id=customerName"+id+"><strong></strong></td>" +
+					"<td id=customerPhone"+id+"></td>"+
+					"<td id=customerAddress"+id+"></td>";
 //    				"<button class='deleteBtn' onclick='deleteItem(this)' title='delete me'></button>";
-	var table = document.getElementById('marketList');
+	var table = document.getElementById('shelterList');
 	table.appendChild(row);
 	
 	if(item){
-		document.getElementById('marketName'+id).innerHTML = item.name;
-		document.getElementById('marketPhone'+id).innerHTML = item.phone;
-		document.getElementById('marketAddress'+id).innerHTML = item.addressLine1 + ", " + item.city + " " + item.state +
+		document.getElementById('customerName'+id).innerHTML = item.name;
+		document.getElementById('customerPhone'+id).innerHTML = item.phone;
+		document.getElementById('customerAddress'+id).innerHTML = item.addressLine1 + ", " + item.city + " " + item.state +
 		" " + item.postalCode;
 	}
 

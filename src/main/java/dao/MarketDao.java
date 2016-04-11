@@ -18,17 +18,17 @@ import javax.ws.rs.core.Response;
 
 
 // CRUD API at /api/todolist
-@Path("/database")
+@Path("/marketDao")
 /**
  * RESTful CRUD service of database.
  *
  */
-public class Database {
+public class MarketDao {
 
 	private UserTransaction utx;
 	private EntityManager em;
 
-	public Database() {
+	public MarketDao() {
 		utx = getUserTransaction();
 		em = getEm();
 	}

@@ -6,11 +6,19 @@
 <meta name="viewport"
 	content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="style.css" />
-<link rel="stylesheet" href="layout.css" />
-<style type="text/css">
-	#map-canvas { height: 50%; margin: 0; padding: 0;}
+<link rel="stylesheet" href="table.css" />
+<style>
+.marketList tr:hover .deleteBtn {
+	background: url('images/remove.png') no-repeat 3px;
+	cursor: pointer;
+	border-color: transparent;
+}
 </style>
+
 <!-- 
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJPap5AruRVqZwxDQBZ8cZoaIv-Nu-srY">
 </script>
@@ -30,65 +38,31 @@
 -->
 </head>
 <body >
-	<div class = "leftHalf">
-	<img class = "newappIcon" src="images/food-box.jpg" />
-				<h1>
-					Welcome to the <span class="blue">Food for the Need</span>
-				</h1>
-				<!--<p class = "description">Get started by reading our <a href = "https://www.ng.bluemix.net/docs/#starters/liberty/index.html#liberty">Java documentation</a> or use the Start Coding guide under your app in your dashboard.</p> -->
-				<p class="description>">Our goal is to eliminate food waste and use it to feed the hungry people.</p>
-	<div id="map-canvas"></div>	
-	</div>
-	<div class = "rightHalf">
+	<div class = "fullPage">
 	<div class = "center">
 	<header>
-					<div class='title' id='Title Page'>
-						Request food for your organization
-					</div>
-					<div class='title' id='Button'>
-						<li><a onclick="toggleServiceInfo()" class="round yellow">About Us
-					 	<span class="round">Learn more about us</span></a></li>
-					 	<li><a onclick="requestFood()" class="round blue">Request Food
-					 	<span class="round">Request food for a food shelter.</span></a></li>
-					 	<li><a onclick="sendFood()" class="round red">Send Food
-					 	<span class="round">Send food to a food shelter.</span></a></li>
-					</div>
-				</header>
+		<div class='title' id='Title Page'>
+			See what we have in the inventory! Starting giving TODAY!
+		</div>
+	</header>
+	<table id='shelterList' class="container">
+	  <thead>
+	    <tr>
+	      <th><h1>Shelter Name</h1></th>
+	      <th><h1>Phone</h1></th>
+	      <th><h1>Location</h1></th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	  </tbody>
+	</table>
+
+	<footer>
+		<div class='tips'>
+			<a href="index.html" class="btn btn-info" role="button">Back</a>
+		</div>
+	</footer>
 				<!-- 
-				<section id='dbserviceinfo' style='display: none;'>
-					<table class = "todolist">
-						<tbody>
-							<tr>
-								<td class='fieldname'>Service Name</td>
-								<td id='envServiceName'></td>
-							</tr>
-							<tr>
-								<td class='fieldname'>DB Name</td>
-								<td id='envDbName'></td>
-							</tr>
-							<tr>
-								<td class='fieldname'>Host</td>
-								<td id='envHost'></td>
-							</tr>
-							<tr>
-								<td class='fieldname'>Port</td>
-								<td id='envPort'></td>
-							</tr>
-							<tr>
-								<td class='fieldname'>User Name</td>
-								<td id='envUser'>*****</td>
-							</tr>
-							<tr>
-								<td class='fieldname'>Password</td>
-								<td id='envPassword'>*****</td>
-							</tr>
-							<tr>
-								<td class='fieldname'>URL</td>
-								<td id='envUrl'></td>
-							</tr>
-						</tbody>
-					</table>
-				</section>
 				<table id='notes' class='records'><tbody></tbody></table>
 				<div id="loading">&nbsp;&nbsp;Please wait while the database is being initialized ...</div>
 				<footer>
@@ -101,9 +75,9 @@
 				</footer> 
 				-->
 				<script type="text/javascript" src="util.js"></script> 
-				<script type="text/javascript" src="index.js"></script>
-					</div>
+				<script type="text/javascript" src="request.js"></script>
+	</div>
 					
-</div>
+	</div>
 </body>
 </html>

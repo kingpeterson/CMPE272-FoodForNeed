@@ -106,8 +106,8 @@ public class Product {
 	@Override
 	public String toString() {
 		return String.format("{\"id\": \"%d\", \"name\": \"%s\", \"productLine\": \"%s\", "
-				+ "\"productScale\": \"%s\", \"latitude\": \"%f\", \"productVendor\": \"%d\", "
+				+ "\"productScale\": \"%s\", \"productVendor\": \"%d\", "
 				+ "\"productDescription\": \"%s\", \"quantityInStock\": \"%d\"}", 
-				id, name, productLine, productScale, latitude, productVendor, productDescription, quantityInStock);
+				id, name, productLine, productScale, productVendor, productDescription, quantityInStock);
 	}
 }
