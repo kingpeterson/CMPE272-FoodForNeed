@@ -52,37 +52,16 @@ function addItem(item, isNew){
 	row.innerHTML = "<td id=marketName"+id+"><strong></strong></td>" +
 					"<td id=marketPhone"+id+"></td>"+
 					"<td id=marketAddress"+id+"></td>";
-//    				"<td class='deleteBtn' onclick='deleteItem(this)' title='delete me'></td>";
+//    				"<button class='deleteBtn' onclick='deleteItem(this)' title='delete me'></button>";
 	var table = document.getElementById('marketList');
 	table.appendChild(row);
-	document.getElementById('marketName'+id).innerHTML = item.name;
-	document.getElementById('marketPhone'+id).innerHTML = item.phone;
-	document.getElementById('marketAddress'+id).innerHTML = item.addressLine1 + ", " + item.city + " " + item.state +
-	" " + item.postalCode;
 	
-//	if(item){
-		
-//		document.getElementById('marketName'+id).innerHTML = item.name;
-//		document.getElementById('marketPhone'+id).innerHTML = item.phone;
-//		document.getElementById('marketAddress'+id).innerHTML = item.addressLine1 + ", " + item.city + " " + item.state +
-//		" " + item.postalCode;
-		
-		/*
-		var name = document.createElement('td');
-		var phone = document.createElement('td');
-		var address = document.createElement('td');
-		row.appendChild(name);
-		row.appendChild(phone);
-		row.appendChild(address);
-		var marketName = document.createTextNode(item.name);
-		var marketPhone = document.createTextNode(item.phone);
-		var marketAddress = document.createTextNode(item.addressLine1 + ", " + item.city + " " + item.state +
-		" " + item.postalCode);
-		name.appendChild(marketName);
-		phone.appendChild(marketPhone);
-		address.appendChild(marketAddress);
-		*/
-//	}
+	if(item){
+		document.getElementById('marketName'+id).innerHTML = item.name;
+		document.getElementById('marketPhone'+id).innerHTML = item.phone;
+		document.getElementById('marketAddress'+id).innerHTML = item.addressLine1 + ", " + item.city + " " + item.state +
+		" " + item.postalCode;
+	}
 
 	row.isNew = !item || isNew;
 }
