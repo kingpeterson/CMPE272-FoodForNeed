@@ -13,17 +13,26 @@ import javax.persistence.Table;
 /*
  * define O-R mapping of customer table
  */
-public class Customer {
+public class Customers {
 	@Id //primary key
 	@Column(name = "customerId")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	long id;
 	
 //	customerId, customerName, city, phone, latitude, longitude, addressLine1, state, country, postalCode
-	
+//	customerId, customerName, contactLastName, contactFirstName, phone, latitude, longitude, addressLine1, addressLine2, city, state, postalCode, countryb 
+
 	@Basic
 	@Column(name = "customerName")
 	String name;
+	
+	@Basic
+	@Column(name = "contactFirstname")
+	String contactFirstname;
+	
+	@Basic
+	@Column(name = "contactLastname")
+	String contactLastname;
 	
 	@Basic
 	@Column(name = "city")
@@ -75,6 +84,22 @@ public class Customer {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public String getContactFirstname() {
+		return contactFirstname;
+	}
+
+	public void setContactFirstname(String contactFirstname) {
+		this.contactFirstname = contactFirstname;
+	}
+	
+	public String getContactLastname() {
+		return contactLastname;
+	}
+
+	public void setCantactLastname(String contactLastname) {
+		this.contactLastname = contactLastname;
 	}
 	
 	public String getCity() {
@@ -151,10 +176,10 @@ public class Customer {
 
 	@Override
 	public String toString() {
-		return String.format("{\"id\": \"%d\", \"name\": \"%s\", \"city\": \"%s\", "
+		return String.format("{\"id\": \"%d\", \"name\": \"%s\", \"contactFirstname\": \"%s\", \"contactLastname\": \"%s\",\"city\": \"%s\", "
 				+ "\"phone\": \"%s\", \"latitude\": \"%f\", \"longitude\": \"%f\", "
 				+ "\"addressLine1\": \"%s\", \"addressLine2\": \"%s\", \"state\": \"%s\", "
 				+ "\"country\": \"%s\", \"postalCode\": \"%s\"}", 
-				id, name, city, phone, latitude, longitude, addressLine1, addressLine2, state, country, postalCode);
+				id, name, contactFirstname, contactLastname, city, phone, latitude, longitude, addressLine1, addressLine2, state, country, postalCode);
 	}
 }

@@ -23,12 +23,12 @@ import javax.ws.rs.core.Response;
  * RESTful CRUD service of database.
  *
  */
-public class CustomerDao {
+public class CustomersDao {
 
 	private UserTransaction utx;
 	private EntityManager em;
 
-	public CustomerDao() {
+	public CustomersDao() {
 		utx = getUserTransaction();
 		em = getEm();
 	}
@@ -36,7 +36,7 @@ public class CustomerDao {
 	@POST
 	public Response create(@FormParam("name") String name) {
 		
-		Customer customer = new Customer();
+		Customers customer = new Customers();
 		customer.setName(name);
 		try {
 			utx.begin();
@@ -63,7 +63,7 @@ public class CustomerDao {
 		
 		try {
 			utx.begin();
-			Customer customer = em.find(Customer.class, id);
+			Customers customer = em.find(Customers.class, id);
 			if (customer != null) {
 				em.remove(customer);
 				utx.commit();
@@ -91,7 +91,7 @@ public class CustomerDao {
 		
 		try {
 			utx.begin();
-			Customer customer = em.find(Customer.class, id);
+			Customers customer = em.find(Customers.class, id);
 			if (customer != null) {
 				customer.setName(name);// TODO check if null
 				em.merge(customer);
@@ -114,24 +114,22 @@ public class CustomerDao {
 		}
 		
 	}
-	/*
+	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response get(@QueryParam("id") long id) {
 		if (id == 0) {
-			List<Market> list = em.createQuery("SELECT t FROM Market t", Market.class).getResultList();
+			List<Customers> list = em.createQuery("SELECT c FROM Customers c", Customers.class).getResultList();
 			//TODO use JSON util like Gson to render objects and use REST Response Writer
 			String json = "{\"id\":\"all\", \"body\":" + list.toString() + "}";
-//			System.out.println(list.toString());
 			System.out.println("I am at id == 0");
 			System.out.println(json);
-			System.out.println(Response.ok(json).build());
 			return Response.ok(json).build();
 		}
-		Market market = null;
+		Customers customer = null;
 		try {
 			utx.begin();
-			market = em.find(Market.class, id);
+			customer = em.find(Customers.class, id);
 			utx.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -145,17 +143,17 @@ public class CustomerDao {
 				e.printStackTrace();
 			}
 		}
-		if (market != null){
+		if (customer != null){
 			System.out.println("I am at found");
-			System.out.println(market.toString());
-			return Response.ok(market.toString()).build();
+			System.out.println(customer.toString());
+			return Response.ok(customer.toString()).build();
 		}
 		else
 			return Response.status(javax.ws.rs.core.Response.Status.NOT_FOUND).build();
 	}
 	
-	*/
 	
+	/*
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public String get(@QueryParam("id") long id) {
@@ -192,6 +190,7 @@ public class CustomerDao {
 		else
 			return "NOT FOUND";
 	}
+	*/
 	/*
 	public void populateDB() {
 		List<TODO> list = em.createQuery("SELECT t FROM TODO t", TODO.class).getResultList();
