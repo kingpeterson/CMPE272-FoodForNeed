@@ -50,6 +50,7 @@ function addItem(item, isNew){
 		row.setAttribute('data-id', id);
 	}
 	row.innerHTML = "<td id=customerName"+id+"><strong></strong></td>" +
+					"<td id=contactName"+id+"></td>"+
 					"<td id=customerPhone"+id+"></td>"+
 					"<td id=customerAddress"+id+"></td>";
 //    				"<button class='deleteBtn' onclick='deleteItem(this)' title='delete me'></button>";
@@ -58,6 +59,7 @@ function addItem(item, isNew){
 	
 	if(item){
 		document.getElementById('customerName'+id).innerHTML = item.name;
+		document.getElementById('contactName'+id).innerHTML = item.contactFirstname + " " + item.contactLastname;
 		document.getElementById('customerPhone'+id).innerHTML = item.phone;
 		document.getElementById('customerAddress'+id).innerHTML = item.addressLine1 + ", " + item.city + " " + item.state +
 		" " + item.postalCode;

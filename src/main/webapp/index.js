@@ -28,14 +28,6 @@ function loadItems(){
 	});
 }
 
-function requestFood(){
-	alert("You want to request food");
-}
-
-function sendFood(){
-	alert("You want to send food");
-}
-
 function addItem(item, isNew){
 	var row = document.createElement('tr');
 	var id = item && item.id;
@@ -121,6 +113,6 @@ function updateServiceInfo(){
 	});
 }
 
-updateServiceInfo();
-loadItems();
+//updateServiceInfo();
+//loadItems();
 
