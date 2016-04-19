@@ -107,7 +107,8 @@
 						  });
 
 						  var infowindow = new google.maps.InfoWindow();
-						  infowindow.setContent('<b>Your Location<b>');
+						  var contentString = '<span class="blue"><p><b>Your Location</p><p>Free Food: xxx lbs</p><p>Available Time: PM7, May 1</p></span>'
+						  infowindow.setContent(contentString);
 						  google.maps.event.addListener(marker, 'mouseover', function() {
 							 infowindow.open(map, marker);
 						  });
