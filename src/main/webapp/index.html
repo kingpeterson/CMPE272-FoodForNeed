@@ -79,8 +79,13 @@
 				<script type="text/javascript" src="index.js"></script>
 				<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyAJPap5AruRVqZwxDQBZ8cZoaIv-Nu-srY"></script>
 				<script>
+
+					var REST_DATA = 'api//marketDao';
+
 					function success(position) {
 						  var mapcanvas = document.createElement('div');
+						  var items = [];
+					      var i;
 						  mapcanvas.id = 'mapcontainer';
 						  mapcanvas.style.height = '440px';
 						  mapcanvas.style.width = '660px';
@@ -100,19 +105,53 @@
 						  };
 						  var map = new google.maps.Map(document.getElementById("mapcontainer"), options);
 					
+						 
+						  //get from db
+						  xhrGet(REST_DATA, function(data){
+							// Make sure the received items have correct format
+							var receivedItems = data.body || [];
+							console.log(receivedItems);
+							for(i = 0; i < receivedItems.length; ++i){
+								var item = receivedItems[i];
+								if(item && 'id' in item && 'name' in item){
+									items.push(item);
+								}
+							}
+							for(i = 0; i < items.length; ++i){
+								console.log(items[i]);
+								//addItemIntoGmap(items[i], false);
+								var location = new google.maps.LatLng(items[i].latitude, items[i].longitude);
+
+								var storemarker = new google.maps.Marker({
+								      position: location,
+								      map: map,
+								      //title:"You are here!"
+								  });
+								  var infowindow = new google.maps.InfoWindow();
+								  var contentString = '<span class="blue"><p>'+items[i].name+'</p></span>'
+								  //'<b>Your Location</p><p>Free Food: xxx lbs</p><p>Available Time: PM7, May 1</p></span>'
+								  infowindow.setContent(contentString);
+								  google.maps.event.addListener(storemarker, 'click', function() {
+									 infowindow.open(map, storemarker);
+								  });
+								  storemarker.setMap(map);
+
+							}
+							}, function(err){
+								console.error(err);
+						  });
+
 						  var marker = new google.maps.Marker({
 						      position: coords,
 						      map: map,
 						      //title:"You are here!"
 						  });
-
 						  var infowindow = new google.maps.InfoWindow();
 						  var contentString = '<span class="blue"><p><b>Your Location</p><p>Free Food: xxx lbs</p><p>Available Time: PM7, May 1</p></span>'
 						  infowindow.setContent(contentString);
 						  google.maps.event.addListener(marker, 'mouseover', function() {
 							 infowindow.open(map, marker);
 						  });
-
 						  marker.setMap(map);
 					}
 						
