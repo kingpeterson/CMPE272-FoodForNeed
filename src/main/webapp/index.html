@@ -83,9 +83,9 @@
 					var REST_DATA = 'api//marketDao';
 
 					function success(position) {
-						  var mapcanvas = document.createElement('div');
 						  var items = [];
 					      var i;
+						  var mapcanvas = document.createElement('div');
 						  mapcanvas.id = 'mapcontainer';
 						  mapcanvas.style.height = '440px';
 						  mapcanvas.style.width = '660px';
@@ -131,7 +131,7 @@
 								  var contentString = '<span class="blue"><p>'+items[i].name+'</p></span>'
 								  //'<b>Your Location</p><p>Free Food: xxx lbs</p><p>Available Time: PM7, May 1</p></span>'
 								  infowindow.setContent(contentString);
-								  google.maps.event.addListener(storemarker, 'click', function() {
+								  google.maps.event.addListener(storemarker, 'mouseover', function() {
 									 infowindow.open(map, storemarker);
 								  });
 								  storemarker.setMap(map);
