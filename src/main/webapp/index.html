@@ -85,6 +85,7 @@
 					function success(position) {
 						  var items = [];
 					      var i;
+					      var makers=[];
 						  var mapcanvas = document.createElement('div');
 						  mapcanvas.id = 'mapcontainer';
 						  mapcanvas.style.height = '440px';
@@ -127,14 +128,15 @@
 								      map: map,
 								      //title:"You are here!"
 								  });
-								  var infowindow = new google.maps.InfoWindow();
+								makers.push(storemarker);
+								/*  var infowindow = new google.maps.InfoWindow();
 								  var contentString = '<span class="blue"><p>'+items[i].name+'</p></span>'
 								  //'<b>Your Location</p><p>Free Food: xxx lbs</p><p>Available Time: PM7, May 1</p></span>'
 								  infowindow.setContent(contentString);
 								  google.maps.event.addListener(storemarker, 'mouseover', function() {
 									 infowindow.open(map, storemarker);
 								  });
-								  storemarker.setMap(map);
+								  storemarker.setMap(map);*/
 
 							}
 							}, function(err){
@@ -153,6 +155,8 @@
 							 infowindow.open(map, marker);
 						  });
 						  marker.setMap(map);
+						  var mcOptions = {gridSize: 20, maxZoom: 15};
+						  var markerCluster = new MarkerClusterer(map, markers, mcOptions);
 					}
 						
 					if (navigator.geolocation) {
