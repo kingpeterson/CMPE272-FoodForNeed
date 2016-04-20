@@ -299,7 +299,7 @@
                         second-level-items
                     </li> -->
                      <li>
-                        <a href="giveaway.html"><i class="fa fa-cart-plus"></i> Giveaway</a>
+                        <a href="giveaway.html"><i class="fa fa-shopping-cart"></i> Giveaway</a>
                     </li>
                     <li>
                         <a href="request.html"><i class="fa fa-truck"></i> Request</a>
@@ -399,8 +399,8 @@
                     <!--Area chart example -->
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <i class="fa fa-bar-chart-o fa-fw"></i>Area Chart Example
-                            <div class="pull-right">
+                            <i class="fa fa-map"></i>Where you are
+                            <!-- <div class="pull-right">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
                                         Actions
@@ -418,21 +418,21 @@
                                         </li>
                                     </ul>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
 
                         <div class="panel-body">
-                            <div id="morris-area-chart"></div>
-                        </div>
+							<article></article>                        
+						</div>
 
                     </div>
                     <!--End area chart example -->
                     <!--Simple table example -->
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <i class="fa fa-bar-chart-o fa-fw"></i>Simple Table Example
+                            <i class="fa fa-bar-chart-o fa-fw"></i>Find out who are participating
                             <div class="pull-right">
-                                <div class="btn-group">
+                                <!-- <div class="btn-group">
                                     <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
                                         Actions
                                         <span class="caret"></span>
@@ -448,7 +448,7 @@
                                         <li><a href="#">Separated link</a>
                                         </li>
                                     </ul>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
 
@@ -456,48 +456,20 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="table-responsive">
-                                        <table class="table table-bordered table-hover table-striped">
+                                        <table id='marketList' class="table table-bordered table-hover table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th>#</th>
-                                                    <th>Date</th>
-                                                    <th>Time</th>
-                                                    <th>Amount</th>
+											      <th>Market Name</th>
+											      <th>Phone</th>
+											      <th>Location</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>3326</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>3:29 PM</td>
-                                                    <td>$321.33</td>
+                                            	<tr>
+	                                                <td>Safeway</td>
+	                                                <td>626-999-3123</td>
+	                                                <td>Some place</td>
                                                 </tr>
-                                                <tr>
-                                                    <td>3325</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>3:20 PM</td>
-                                                    <td>$234.34</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3324</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>3:03 PM</td>
-                                                    <td>$724.17</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3323</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>3:00 PM</td>
-                                                    <td>$23.71</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3322</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>2:49 PM</td>
-                                                    <td>$8345.23</td>
-                                                </tr>
-
-
                                             </tbody>
                                         </table>
                                     </div>
@@ -555,19 +527,13 @@
                         </div>
                     </div>
 
-
-
-
-
-
-
                 </div>
 
             </div>
 
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-lg-4">
-                    <!-- Notifications-->
+                    Notifications
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <i class="fa fa-bell fa-fw"></i>Notifications Panel
@@ -617,15 +583,15 @@
                                 </a>
 
                             </div>
-                            <!-- /.list-group -->
+                            /.list-group
                             <a href="#" class="btn btn-default btn-block">View All Alerts</a>
                         </div>
 
                     </div>
-                    <!--End Notifications-->
+                    End Notifications
                 </div>
                 <div class="col-lg-4">
-                    <!-- Donut Example-->
+                    Donut Example
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <i class="fa fa-bar-chart-o fa-fw"></i>Donut Chart Example
@@ -636,10 +602,10 @@
                         </div>
 
                     </div>
-                    <!--End Donut Example-->
+                    End Donut Example
                 </div>
                 <div class="col-lg-4">
-                    <!-- Chat Panel Example-->
+                    Chat Panel Example
                     <div class="chat-panel panel panel-primary">
                         <div class="panel-heading">
                             <i class="fa fa-comments fa-fw"></i>
@@ -757,23 +723,22 @@
                         </div>
 
                     </div>
-                    <!--End Chat Panel Example-->
+                    End Chat Panel Example
                 </div>
-            </div>
-
-
-         
-
+            </div> -->
 
         </div>
         <!-- end page-wrapper -->
 
     </div>
     <!-- end wrapper -->
+    <script type="text/javascript" src="giveaway.js"></script>
 
     <!-- Core Scripts - Include with every page -->
-    <script src="assets/plugins/jquery-1.10.2.js"></script>
-    <script src="assets/plugins/bootstrap/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<!--     <script src="assets/plugins/jquery-1.10.2.js"></script>
+    <script src="assets/plugins/bootstrap/bootstrap.min.js"></script> -->
     <script src="assets/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="assets/plugins/pace/pace.js"></script>
     <script src="assets/scripts/siminta.js"></script>
@@ -781,6 +746,53 @@
     <script src="assets/plugins/morris/raphael-2.1.0.min.js"></script>
     <script src="assets/plugins/morris/morris.js"></script>
     <script src="assets/scripts/dashboard-demo.js"></script>
+    
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyAJPap5AruRVqZwxDQBZ8cZoaIv-Nu-srY"></script>
+	<script>
+		function success(position) {
+			  var mapcanvas = document.createElement('div');
+			  mapcanvas.id = 'mapcontainer';
+			  mapcanvas.style.height = '440px';
+			  mapcanvas.style.width = '660px';
+		
+			  document.querySelector('article').appendChild(mapcanvas);
+		
+			  var coords = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+			  
+			  var options = {
+			    zoom: 17,
+			    center: coords,
+			    mapTypeControl: false,
+			    navigationControlOptions: {
+			    	style: google.maps.NavigationControlStyle.SMALL
+			    },
+			    mapTypeId: google.maps.MapTypeId.ROADMAP
+			  };
+			  var map = new google.maps.Map(document.getElementById("mapcontainer"), options);
+		
+			  var marker = new google.maps.Marker({
+			      position: coords,
+			      map: map,
+			      //title:"You are here!"
+			  });
+
+			  var infowindow = new google.maps.InfoWindow();
+			  var contentString = '<span class="blue"><p><b>Your Location</p><p>Free Food: xxx lbs</p><p>Available Time: PM7, May 1</p></span>'
+			  infowindow.setContent(contentString);
+			  google.maps.event.addListener(marker, 'mouseover', function() {
+				 infowindow.open(map, marker);
+			  });
+
+			  marker.setMap(map);
+		}
+			
+		if (navigator.geolocation) {
+		  navigator.geolocation.getCurrentPosition(success);
+		} else {
+		  error('Geo Location is not supported');
+		}
+	
+	</script>
 
 </body>
 
