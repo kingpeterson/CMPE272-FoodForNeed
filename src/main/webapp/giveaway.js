@@ -54,7 +54,9 @@ function addItem(item, isNew){
 					"<td id=marketAddress"+id+"></td>";
 //    				"<button class='deleteBtn' onclick='deleteItem(this)' title='delete me'></button>";
 	var table = document.getElementById('marketList');
-	table.appendChild(row);
+//	table.appendChild(row);
+	table.tBodies[0].appendChild(row);
+
 	
 	if(item){
 		document.getElementById('marketName'+id).innerHTML = item.name;

@@ -68,24 +68,19 @@ function addItem(item, isNew){
 */
 function addMarket(item, isNew){
 	var row = document.createElement('tr');
-	row.setAttribute('class', 'gradeA');	
 	var id = item && item.id;
+
 	if(id){
 		row.setAttribute('data-id', id);
+		row.setAttribute('class', 'gradeA');
+		
 	}
 	row.innerHTML = "<td id=marketName"+id+"></td>" +
 					"<td id=marketPhone"+id+"></td>"+
 					"<td id=marketAddress"+id+"></td>";
 //    				"<button class='deleteBtn' onclick='deleteItem(this)' title='delete me'></button>";
 	var table = document.getElementById('marketList');
-//	var table = document.getElementById('marketList').getElementsByTagName('tbody')[0];
-//	// Insert a row in the table at the last row
-//	var newRow   = tableRef.insertRow(tableRef.rows.length);
-//
-//	// Insert a cell in the row at index 0
-//	var newCell  = newRow.insertCell(0);
 	table.tBodies[0].appendChild(row);
-
 
 //	table.appendChild(row);
 	

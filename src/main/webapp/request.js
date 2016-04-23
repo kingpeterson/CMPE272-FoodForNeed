@@ -55,7 +55,8 @@ function addItem(item, isNew){
 					"<td id=customerAddress"+id+"></td>";
 //    				"<button class='deleteBtn' onclick='deleteItem(this)' title='delete me'></button>";
 	var table = document.getElementById('shelterList');
-	table.appendChild(row);
+	table.tBodies[0].appendChild(row);
+//	table.appendChild(row);
 	
 	if(item){
 		document.getElementById('customerName'+id).innerHTML = item.name;
