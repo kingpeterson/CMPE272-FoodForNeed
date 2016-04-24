@@ -1,5 +1,5 @@
 var MARKET_DATA = 'api//marketDao';
-var PRODUCT_DATA = 'api//productDao';
+var PRODUCT_DATA = 'api//productsDao';
 
 function loadMarket(){
 	xhrGet(MARKET_DATA, function(data){

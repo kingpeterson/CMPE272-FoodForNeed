@@ -16,28 +16,44 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.json.JSONObject;
+
 
 // CRUD API at /api/todolist
-@Path("/productDao")
+@Path("/productsDao")
 /**
  * RESTful CRUD service of database.
  *
  */
-public class ProductDao {
+public class ProductsDao {
 
 	private UserTransaction utx;
 	private EntityManager em;
 
-	public ProductDao() {
+	public ProductsDao() {
 		utx = getUserTransaction();
 		em = getEm();
 	}
 
 	@POST
-	public Response create(@FormParam("name") String name) {
-		
-		Product product = new Product();
-		product.setName(name);
+	public Response create(String input) {
+		Products product = new Products();
+
+		try{
+			JSONObject newInput = new JSONObject(input);
+			product.setSeafood(newInput.getInt("seafood"));
+			product.setMeat(newInput.getInt("meat"));
+			product.setVegetable(newInput.getInt("vegetable"));
+			product.setFruit(newInput.getInt("fruit"));
+			product.setOthers(newInput.getInt("others"));
+			product.setMarketId(newInput.getLong("marketId"));
+			product.setOrderDate(newInput.getString("orderDate"));
+			product.setSrcLatitude(newInput.getDouble("srcLatitude"));
+			product.setSrcLongitude(newInput.getDouble("srcLongitude"));
+
+		}catch (Exception e){
+			e.printStackTrace();
+		}
 		try {
 			utx.begin();
 			em.persist(product);
@@ -63,7 +79,7 @@ public class ProductDao {
 		
 		try {
 			utx.begin();
-			Product product = em.find(Product.class, id);
+			Products product = em.find(Products.class, id);
 			if (product != null) {
 				em.remove(product);
 				utx.commit();
@@ -87,13 +103,28 @@ public class ProductDao {
 	}
 
 	@PUT
-	public Response update(@FormParam("id") long id, @FormParam("name") String name) {
+	public Response update(@FormParam("id") long id, String input) {
 		
 		try {
 			utx.begin();
-			Product product = em.find(Product.class, id);
+			Products product = em.find(Products.class, id);
 			if (product != null) {
-				product.setName(name);// TODO check if null
+//				product.setName(name);// TODO check if null
+				try{
+					JSONObject newInput = new JSONObject(input);
+					product.setSeafood(newInput.getInt("seafood"));
+					product.setMeat(newInput.getInt("meat"));
+					product.setVegetable(newInput.getInt("vegetable"));
+					product.setFruit(newInput.getInt("fruit"));
+					product.setOthers(newInput.getInt("others"));
+					product.setMarketId(newInput.getLong("marketId"));
+					product.setOrderDate(newInput.getString("orderDate"));
+					product.setSrcLatitude(newInput.getDouble("srcLatitude"));
+					product.setSrcLongitude(newInput.getDouble("srcLongitude"));
+
+				}catch (Exception e){
+					e.printStackTrace();
+				}
 				em.merge(product);
 				utx.commit();
 				return Response.ok().build();
@@ -119,17 +150,17 @@ public class ProductDao {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response get(@QueryParam("id") long id) {
 		if (id == 0) {
-			List<Product> list = em.createQuery("SELECT p FROM Product p", Product.class).getResultList();
+			List<Products> list = em.createQuery("SELECT p FROM Products p", Products.class).getResultList();
 			//TODO use JSON util like Gson to render objects and use REST Response Writer
 			String json = "{\"id\":\"all\", \"body\":" + list.toString() + "}";
 			System.out.println("I am at id == 0");
 			System.out.println(json);
 			return Response.ok(json).build();
 		}
-		Product product = null;
+		Products product = null;
 		try {
 			utx.begin();
-			product = em.find(Product.class, id);
+			product = em.find(Products.class, id);
 			utx.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
