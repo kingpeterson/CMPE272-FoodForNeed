@@ -9,11 +9,13 @@
     <link href="assets/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
     <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link href="assets/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
-  <link href="assets/css/style.css" rel="stylesheet" />
+    <link href="assets/css/style.css" rel="stylesheet" />
       <link href="assets/css/main-style.css" rel="stylesheet" />
 
     <!-- Page-Level CSS -->
     <link href="assets/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="assets/plugins/dataTables/select.dataTables.min.css" rel="stylesheet" />
+    
 
 </head>
 
@@ -324,9 +326,10 @@
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover" id="marketList">
+                                <table class="table" id="marketList">
                                     <thead>
                                         <tr>
+                                          <th></th>
 									      <th>Market Name</th>
 									      <th>Phone</th>
 									      <th>Location</th>
@@ -351,20 +354,7 @@
                              Product List
                         </div>
                         <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover" id="productList">
-                                    <thead>
-                                        <tr>
-									      <th>Product Name</th>
-									      <th>Phone</th>
-									      <th>Location</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        
-                                    </tbody>
-                                </table>
-                            </div>
+                            
                             
                         </div>
                     </div>
@@ -379,6 +369,7 @@
     <!-- end wrapper -->
     <script type="text/javascript" src="util.js"></script> 
     <script type="text/javascript" src="donate.js"></script>
+    
     <!-- Core Scripts - Include with every page -->
     <script src="assets/plugins/jquery-1.10.2.js"></script>
     <script src="assets/plugins/bootstrap/bootstrap.min.js"></script>
@@ -387,14 +378,53 @@
     <script src="assets/scripts/siminta.js"></script>
     <!-- Page-Level Plugin Scripts-->
     <script src="assets/plugins/dataTables/jquery.dataTables.js"></script>
-    <script src="assets/plugins/dataTables/dataTables.bootstrap.js"></script>
+    <script src="assets/plugins/dataTables/dataTables.select.min.js"></script> 
+	<script src="assets/plugins/dataTables/dataTables.bootstrap.js"></script>
     <script>
+    	function loadTable(){
+    		var table = $('#marketList').DataTable({     
+            	columnDefs: [ {
+	                orderable: false,
+	                className: 'select-checkbox',
+	                targets:   0
+            	} ],
+            	select: {
+                	style:    'os',
+                	selector: 'td:first-child'
+            	},
+            	order: [[ 1, 'asc' ]]
+        	});
+            
+            $('#marketList tbody').on('click', 'tr', function(){
+            	$(this).toggleClass('selected');
+            	//alert(table.rows('selected').data().toString());
+            });
+    	}
         $(document).ready(function () {
-            $('#marketList').dataTable();
-            $('#productList').dataTable();
+        	setTimeout(function(){
+        		loadTable();
+        	}, 1000);
+            /* var table = $('#marketList').DataTable({     
+            	columnDefs: [ {
+	                orderable: false,
+	                className: 'select-checkbox',
+	                targets:   0
+            	} ],
+            	select: {
+                	style:    'os',
+                	selector: 'td:first-child'
+            	},
+            	order: [[ 1, 'asc' ]]
+        	});
+            
+            $('#marketList tbody').on('click', 'tr', function(){
+            	$(this).toggleClass('selected');
+            	//alert(table.rows('selected').data().toString());
+            }); */
 
         });
     </script>
+
 
 </body>
 

@@ -39,7 +39,11 @@ function loadProduct(){
 		}
 		for(i = 0; i < items.length; ++i){
 			console.log(items[i]);
-			addMarket(items[i], false);
+			if(i == item.length-1)
+				addMarket(items[i], true);
+			else
+				addMarket(items[i], false);
+
 
 		}
 	}, function(err){
@@ -66,7 +70,7 @@ function addItem(item, isNew){
 	textarea.focus();
 }
 */
-function addMarket(item, isNew){
+function addMarket(item, isLast){
 	var row = document.createElement('tr');
 	var id = item && item.id;
 
@@ -75,7 +79,8 @@ function addMarket(item, isNew){
 		row.setAttribute('class', 'gradeA');
 		
 	}
-	row.innerHTML = "<td id=marketName"+id+"></td>" +
+	row.innerHTML = "<td></td>" +
+					"<td id=marketName"+id+"></td>" +
 					"<td id=marketPhone"+id+"></td>"+
 					"<td id=marketAddress"+id+"></td>";
 //    				"<button class='deleteBtn' onclick='deleteItem(this)' title='delete me'></button>";
@@ -91,7 +96,7 @@ function addMarket(item, isNew){
 		" " + item.postalCode;
 	}
 
-	row.isNew = !item || isNew;
+//	row.isNew = !item || isNew;
 }
 
 function deleteItem(deleteBtnNode){
