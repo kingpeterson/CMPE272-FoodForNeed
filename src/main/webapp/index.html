@@ -155,7 +155,7 @@
 						  google.maps.event.addListener(marker, 'mouseover', function() {
 							 infowindow.open(map, marker);
 						  });
-						  markers.psuh(marker);
+						  markers.push(marker);
 						  var mcOptions = {gridSize: 50, maxZoom: 17};
 						  var markerCluster = new MarkerClusterer(map, markers, mcOptions);
 					}
