@@ -119,11 +119,11 @@ function addProducts(item, isNew){
 	
 	if(item){
 		document.getElementById('productId'+id).innerHTML = item.id;
-		document.getElementById('seafood'+id).innerHTML = item.seafood+" lb";
-		document.getElementById('meat'+id).innerHTML = item.meat+" lb";
-		document.getElementById('vegetable'+id).innerHTML = item.vegetable+" lb";
-		document.getElementById('fruit'+id).innerHTML = item.fruit+" lb";
-		document.getElementById('others'+id).innerHTML = item.others+" lb";
+		document.getElementById('seafood'+id).innerHTML = item.seafood;
+		document.getElementById('meat'+id).innerHTML = item.meat;
+		document.getElementById('vegetable'+id).innerHTML = item.vegetable;
+		document.getElementById('fruit'+id).innerHTML = item.fruit;
+		document.getElementById('others'+id).innerHTML = item.others;
 		document.getElementById('orderDate'+id).innerHTML = item.orderDate;
 
 

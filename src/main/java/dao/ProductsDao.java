@@ -78,15 +78,18 @@ public class ProductsDao {
 
 	@DELETE
 	public Response delete(@QueryParam("id") long id) {
-		
+		System.out.println("I am at delete product");
 		try {
 			utx.begin();
 			Products product = em.find(Products.class, id);
 			if (product != null) {
+				System.out.println(product);
 				em.remove(product);
 				utx.commit();
+				System.out.println("delete done");
 				return Response.ok().build();
 			} else {
+				System.out.println("not found");
 				return Response.status(javax.ws.rs.core.Response.Status.NOT_FOUND).build();
 			}
 		} catch (Exception e) {

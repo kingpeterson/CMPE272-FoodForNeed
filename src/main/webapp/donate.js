@@ -154,6 +154,7 @@ function submitProduct(){
 	var othersValue = (document.getElementById('others').value == "") ? 0 : document.getElementById('others').value;
 	var orderDateValue = document.getElementById('orderDate').value;
 	var orderTime = document.getElementById('orderTime').value;
+	//marketTemp second element is marketId
 	var id = marketInfo[1];
 	var marketData;
 	xhrGet(MARKET_DATA +'?id=' +id, function(data){

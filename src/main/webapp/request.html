@@ -115,11 +115,11 @@
                                         <tr>
                                           <th></th>
                                           <th>ID</th>
-									      <th>Seafood</th>
-									      <th>Meat</th>
-									      <th>Vegetable</th>
-									      <th>Fruit</th>
-									      <th>Others</th>
+									      <th>Seafood (lb)</th>
+									      <th>Meat (lb)</th>
+									      <th>Vegetable (lb)</th>
+									      <th>Fruit (lb)</th>
+									      <th>Others (lb)</th>
 									      <th>Available Time</th>
                                         </tr>
                                     </thead>
@@ -127,7 +127,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                        	<button type="button" class="btn btn-primary" onclick="">Submit</button>
+                        	<button type="button" class="btn btn-primary" id="submitOrder">Submit</button>
                         	    
                         </div>
                     </div>
@@ -156,6 +156,10 @@
 	<script src="assets/plugins/dataTables/dataTables.bootstrap.js"></script>
 	<script src="assets/plugins/timedropper.js"></script>
     <script>
+   		var CUSTOMERS_DATA = 'api//customersDao';
+   		var ORDER_DATA = 'api//ordersDao';
+   		var PRODUCT_DATA = 'api//productsDao';
+
 		/*
 		var geocoder = new google.maps.Geocoder();
 		var latitude = item.srcLatitude;
@@ -225,9 +229,10 @@
                		alert("storage not available");
             });
     		
+        	var productData = [];
+
     		$('#productList tbody').on('click', 'tr', function(e){
             	$(this).toggleClass('selected');
-            	var productData = [];
             	for(var i = 0; i < productTable.rows('.selected').data().length; ++i){
             		productData[i] = productTable.rows('.selected').data()[i];
             	}
@@ -236,6 +241,100 @@
                	else
                		alert("storage not available");
             });
+    		
+    		var shelterData;
+    		
+    		$('#submitOrder').click(function(){
+    			var shelterTemp = localStorage.getItem("shelterInfo");
+    			var shelterInfo = shelterTemp.split(",");
+    			var customerId = shelterInfo[1];
+    			console.log("shelterTemp");
+    			console.log(shelterTemp);
+
+    			console.log("customerId");
+    			console.log(customerId);
+    			console.log("productData.length");
+    			console.log(productData.length);
+    			for(var j = 0; j < productData.length; j++){
+    				console.log("productData"+j);
+    				console.log(productData[j]);
+    				console.log(productData[j][0]);
+    				console.log(productData[j][1]);
+    				console.log(productData[j][2]);
+
+
+    			}
+
+
+    			xhrGet(CUSTOMERS_DATA +'?id=' +customerId, function(data){
+    				console.log("data");
+    				console.log(data);
+    				if(data != null){
+    					shelterData = data;
+    					console.log("shelterData");
+    					console.log(shelterData);
+    					for(var count = 0; count < productData.length; count++){
+    						console.log("productData[count]");
+    						console.log(productData[count]);
+//id, seafood, meat, vegetable, fruit, others, marketId, orderDate, srcLatitude, srcLongitude);
+
+//id, seafood, meat, vegetable, fruit, others, marketId, orderDate, srcLatitude, srcLongitude, customerId, destLatitude, destLongitude);
+							var productId = productData[count][1];
+    						console.log("productId");
+    						console.log(productId);
+    						xhrGet(PRODUCT_DATA +'?id=' +productId, function(product){
+								console.log("product");
+								console.log(product);
+								if(product != null){
+		    						var orderData = {
+	        							seafood: product.seafood,
+	        							meat: product.meat,
+	        							vegetable: product.vegetable,
+	        							fruit: product.fruit,
+	        							others: product.others,
+	        							marketId: product.marketId,
+	        							orderDate: product.orderDate,
+	        							srcLatitude: product.srcLatitude,
+	        							srcLongitude: product.srcLongitude,
+	        							customerId: customerId,
+	        							destLatitude: shelterData.latitude,
+	        							destLongitude: shelterData.longitude
+	        						};
+		    						console.log("orderData");
+		    						console.log(orderData);
+									
+	        						xhrPost(ORDER_DATA, orderData, function(){
+	        							console.log("Done updating order");
+	        						}, function(err){
+	        							console.error(err);
+	        							alert("Placing order failed....");
+	        						});
+	        						
+        							console.log("I am about to delete");
+	        						console.log("productId before delete");
+	        						console.log(product.id);
+	        						xhrDelete(PRODUCT_DATA + '?id=' + product.id, function(){
+	        							productTable.rows('.selected').remove().draw(false);
+	        							console.log("Deleting product success");
+	        							alert("Order placed!");
+	        						}, function(err){
+	        							console.error(err);
+	        						});
+	        							
+	        						
+								}
+								else
+			    					alert("Product Information not found, please try again!");
+							});
+    					}
+    				}
+    				else{
+    					alert("Shelter Information not found, please try again!");
+    					
+    				}
+    			});
+
+    		});
         
     	}
     	
