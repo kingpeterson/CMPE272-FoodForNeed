@@ -18,7 +18,7 @@ import javax.ws.rs.core.Response;
 
 
 // CRUD API at /api/todolist
-@Path("/customerDao")
+@Path("/customersDao")
 /**
  * RESTful CRUD service of database.
  *
