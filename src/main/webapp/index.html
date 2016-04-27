@@ -239,7 +239,6 @@
 	
 	<script>
 		var REST_DATA = 'api//marketDao';
-
 		function success(position) {
 			  var items = [];
 		      var i;
@@ -263,10 +262,24 @@
 			    mapTypeId: google.maps.MapTypeId.ROADMAP
 			  };
 			  var map = new google.maps.Map(document.getElementById("mapcontainer"), options);
-		
+			
+			   var marker = new google.maps.Marker({
+			      position: coords,
+			      map: map,
+			      //title:"You are here!"
+			  });
+			  var infowindow = new google.maps.InfoWindow();
+			  var contentString = '<span class="blue"><p><b>Your Location</p><p>Free Food: xxx lbs</p><p>Available Time: PM7, May 1</p></span>'
+			  infowindow.setContent(contentString);
+			  google.maps.event.addListener(marker, 'mouseover', function() {
+				 infowindow.open(map, marker);
+			  });
+			  markers.push(marker);
+			  var mcOptions = {gridSize: 50, maxZoom: 17};
+			  var markerCluster = new MarkerClusterer(map, markers, mcOptions);
 			  
 			  //get from db
-			  xhrGet(REST_DATA, function(data){
+			xhrGet(REST_DATA, function(data){
 				// Make sure the received items have correct format
 				var receivedItems = data.body || [];
 				console.log(receivedItems);
@@ -295,26 +308,12 @@
 						 infowindow.open(map, storemarker);
 					  });
 					  storemarker.setMap(map);*/
-
 				}
-				}, function(err){
-					console.error(err);
-			  });
-				
-			  var marker = new google.maps.Marker({
-			      position: coords,
-			      map: map,
-			      //title:"You are here!"
-			  });
-			  var infowindow = new google.maps.InfoWindow();
-			  var contentString = '<span class="blue"><p><b>Your Location</p><p>Free Food: xxx lbs</p><p>Available Time: PM7, May 1</p></span>'
-			  infowindow.setContent(contentString);
-			  google.maps.event.addListener(marker, 'mouseover', function() {
-				 infowindow.open(map, marker);
-			  });
-			  markers.push(marker);
-			  var mcOptions = {gridSize: 50, maxZoom: 17};
-			  var markerCluster = new MarkerClusterer(map, markers, mcOptions);
+			}, function(err){
+				console.error(err);
+			});
+
+			markerCluster.addMarkers(markers,true);
 		}
 			
 		if (navigator.geolocation) {
