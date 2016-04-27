@@ -16,8 +16,6 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.json.JSONObject;
-
 
 // CRUD API at /api/todolist
 @Path("/productsDao")
@@ -36,31 +34,35 @@ public class ProductsDao {
 	}
 
 	@POST
-	public Response create(String input) {
+	public Response create(@FormParam("seafood") Integer seafood, 
+			@FormParam("meat") Integer meat,
+			@FormParam("vegetable") Integer vegetable,
+			@FormParam("fruit") Integer fruit,
+			@FormParam("others") Integer others,
+			@FormParam("marketId") Long marketId,
+			@FormParam("orderDate") String orderDate,
+			@FormParam("srcLatitude") Double srcLatitude,
+			@FormParam("srcLongitude") Double srcLongitude) {
+		System.out.println("input from web\n");
 		Products product = new Products();
-
-		try{
-			JSONObject newInput = new JSONObject(input);
-			product.setSeafood(newInput.getInt("seafood"));
-			product.setMeat(newInput.getInt("meat"));
-			product.setVegetable(newInput.getInt("vegetable"));
-			product.setFruit(newInput.getInt("fruit"));
-			product.setOthers(newInput.getInt("others"));
-			product.setMarketId(newInput.getLong("marketId"));
-			product.setOrderDate(newInput.getString("orderDate"));
-			product.setSrcLatitude(newInput.getDouble("srcLatitude"));
-			product.setSrcLongitude(newInput.getDouble("srcLongitude"));
-
-		}catch (Exception e){
-			e.printStackTrace();
-		}
+		product.setSeafood(seafood);
+		product.setMeat(meat);
+		product.setVegetable(vegetable);
+		product.setFruit(fruit);
+		product.setOthers(others);
+		product.setMarketId(marketId);
+		product.setOrderDate(orderDate);
+		product.setSrcLatitude(srcLatitude);
+		product.setSrcLongitude(srcLongitude);
 		try {
 			utx.begin();
 			em.persist(product);
 			utx.commit();
+			System.out.println(Response.ok(product.toString()).build());
 			return Response.ok(product.toString()).build();
 		} catch (Exception e) {
-			e.printStackTrace();			
+			e.printStackTrace();
+			System.out.println(e);
 			return Response.status(javax.ws.rs.core.Response.Status.INTERNAL_SERVER_ERROR).build();
 		} finally {
 			try {
@@ -76,15 +78,18 @@ public class ProductsDao {
 
 	@DELETE
 	public Response delete(@QueryParam("id") long id) {
-		
+		System.out.println("I am at delete product");
 		try {
 			utx.begin();
 			Products product = em.find(Products.class, id);
 			if (product != null) {
+				System.out.println(product);
 				em.remove(product);
 				utx.commit();
+				System.out.println("delete done");
 				return Response.ok().build();
 			} else {
+				System.out.println("not found");
 				return Response.status(javax.ws.rs.core.Response.Status.NOT_FOUND).build();
 			}
 		} catch (Exception e) {
@@ -103,30 +108,34 @@ public class ProductsDao {
 	}
 
 	@PUT
-	public Response update(@FormParam("id") long id, String input) {
+	public Response update(@FormParam("id") long id, 
+			@FormParam("seafood") Integer seafood, 
+			@FormParam("meat") Integer meat,
+			@FormParam("vegetable") Integer vegetable,
+			@FormParam("fruit") Integer fruit,
+			@FormParam("others") Integer others,
+			@FormParam("marketId") Long marketId,
+			@FormParam("orderDate") String orderDate,
+			@FormParam("srcLatitude") Double srcLatitude,
+			@FormParam("srcLongitude") Double srcLongitude) {
 		
 		try {
 			utx.begin();
 			Products product = em.find(Products.class, id);
 			if (product != null) {
 //				product.setName(name);// TODO check if null
-				try{
-					JSONObject newInput = new JSONObject(input);
-					product.setSeafood(newInput.getInt("seafood"));
-					product.setMeat(newInput.getInt("meat"));
-					product.setVegetable(newInput.getInt("vegetable"));
-					product.setFruit(newInput.getInt("fruit"));
-					product.setOthers(newInput.getInt("others"));
-					product.setMarketId(newInput.getLong("marketId"));
-					product.setOrderDate(newInput.getString("orderDate"));
-					product.setSrcLatitude(newInput.getDouble("srcLatitude"));
-					product.setSrcLongitude(newInput.getDouble("srcLongitude"));
-
-				}catch (Exception e){
-					e.printStackTrace();
-				}
+				product.setSeafood(seafood);
+				product.setMeat(meat);
+				product.setVegetable(vegetable);
+				product.setFruit(fruit);
+				product.setOthers(others);
+				product.setMarketId(marketId);
+				product.setOrderDate(orderDate);
+				product.setSrcLatitude(srcLatitude);
+				product.setSrcLongitude(srcLongitude);
 				em.merge(product);
 				utx.commit();
+				System.out.println(Response.ok().build());
 				return Response.ok().build();
 			} else {
 				return Response.status(javax.ws.rs.core.Response.Status.NOT_FOUND).build();

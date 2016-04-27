@@ -1,8 +1,8 @@
-var REST_DATA = 'api//customerDao';
-var REST_ENV = 'api/dbinfo';
+var CUSTOMERS_DATA = 'api//customersDao';
+var PRODUCT_DATA = 'api//productsDao';
 
-function loadDatabase(){
-	xhrGet(REST_DATA, function(data){
+function loadCustomers(){
+	xhrGet(CUSTOMERS_DATA, function(data){
 		var receivedItems = data.body || [];
 		var items = [];
 		var i;		
@@ -16,13 +16,37 @@ function loadDatabase(){
 		}
 		for(i = 0; i < items.length; ++i){
 			console.log(items[i]);
-			addItem(items[i], false);
+			addCustomers(items[i], false);
 
 		}
 	}, function(err){
 		console.error(err);
 	});
 }
+
+function loadProduct(){
+	xhrGet(PRODUCT_DATA, function(data){
+		var receivedItems = data.body || [];
+		var items = [];
+		var i;		
+		// Make sure the received items have correct format
+		console.log(receivedItems);
+		for(i = 0; i < receivedItems.length; ++i){
+			var item = receivedItems[i];
+			if(item && 'id' in item){
+				items.push(item);
+			}
+		}
+		for(i = 0; i < items.length; ++i){
+			console.log(items[i]);
+			addProducts(items[i], false);
+
+		}
+	}, function(err){
+		console.error(err);
+	});
+}
+
 /*
 function addItem(item, isNew){
 	var row = document.createElement('tr');
@@ -43,13 +67,15 @@ function addItem(item, isNew){
 	textarea.focus();
 }
 */
-function addItem(item, isNew){
+function addCustomers(item, isNew){
 	var row = document.createElement('tr');
 	var id = item && item.id;
 	if(id){
 		row.setAttribute('data-id', id);
 	}
-	row.innerHTML = "<td id=customerName"+id+"><strong></strong></td>" +
+	row.innerHTML = "<td></td>" +
+					"<td id=customerId"+id+"></td>" +
+					"<td id=customerName"+id+"></td>" +
 					"<td id=contactName"+id+"></td>"+
 					"<td id=customerPhone"+id+"></td>"+
 					"<td id=customerAddress"+id+"></td>";
@@ -59,11 +85,50 @@ function addItem(item, isNew){
 //	table.appendChild(row);
 	
 	if(item){
+		document.getElementById('customerId'+id).innerHTML = item.id;
 		document.getElementById('customerName'+id).innerHTML = item.name;
 		document.getElementById('contactName'+id).innerHTML = item.contactFirstname + " " + item.contactLastname;
 		document.getElementById('customerPhone'+id).innerHTML = item.phone;
 		document.getElementById('customerAddress'+id).innerHTML = item.addressLine1 + ", " + item.city + " " + item.state +
 		" " + item.postalCode;
+	}
+
+	row.isNew = !item || isNew;
+}
+
+function addProducts(item, isNew){
+	var row = document.createElement('tr');
+	var id = item && item.id;
+	if(id){
+		row.setAttribute('data-id', id);
+	}
+	row.innerHTML = "<td></td>" +
+					"<td id=productId"+id+"></td>" +
+					"<td id=seafood"+id+"></td>" +
+					"<td id=meat"+id+"></td>"+
+					"<td id=vegetable"+id+"></td>"+
+					"<td id=fruit"+id+"></td>" +
+					"<td id=others"+id+"></td>" +
+					"<td id=orderDate"+id+"></td>";
+
+//    				"<button class='deleteBtn' onclick='deleteItem(this)' title='delete me'></button>";
+	var table = document.getElementById('productList');
+	table.tBodies[0].appendChild(row);
+//	table.appendChild(row);
+
+	
+	if(item){
+		document.getElementById('productId'+id).innerHTML = item.id;
+		document.getElementById('seafood'+id).innerHTML = item.seafood;
+		document.getElementById('meat'+id).innerHTML = item.meat;
+		document.getElementById('vegetable'+id).innerHTML = item.vegetable;
+		document.getElementById('fruit'+id).innerHTML = item.fruit;
+		document.getElementById('others'+id).innerHTML = item.others;
+		document.getElementById('orderDate'+id).innerHTML = item.orderDate;
+
+
+		
+
 	}
 
 	row.isNew = !item || isNew;
@@ -114,12 +179,6 @@ function saveChange(contentNode, callback){
 	}
 }
 
-function updateServiceInfo(){
-	xhrGet(REST_ENV, function(dbinfo){
-		
-	}, function(err){
-		console.error(err);
-	});
-}
 
-loadDatabase();
+loadCustomers();
+loadProduct();

@@ -39,10 +39,7 @@ function loadProduct(){
 		}
 		for(i = 0; i < items.length; ++i){
 			console.log(items[i]);
-			if(i == item.length-1)
-				addMarket(items[i], true);
-			else
-				addMarket(items[i], false);
+			addMarket(items[i], false);
 
 
 		}
@@ -80,6 +77,7 @@ function addMarket(item, isLast){
 		
 	}
 	row.innerHTML = "<td></td>" +
+					"<td id=marketId"+id+"></td>" +
 					"<td id=marketName"+id+"></td>" +
 					"<td id=marketPhone"+id+"></td>"+
 					"<td id=marketAddress"+id+"></td>";
@@ -94,6 +92,8 @@ function addMarket(item, isLast){
 		document.getElementById('marketPhone'+id).innerHTML = item.phone;
 		document.getElementById('marketAddress'+id).innerHTML = item.addressLine1 + ", " + item.city + " " + item.state +
 		" " + item.postalCode;
+		document.getElementById('marketId'+id).innerHTML = item.id;
+
 	}
 
 //	row.isNew = !item || isNew;
@@ -142,6 +142,69 @@ function saveChange(contentNode, callback){
 			console.error(err);
 		});
 	}
+}
+
+function submitProduct(){
+	var marketTemp = localStorage.getItem("marketInfo");
+	var marketInfo = marketTemp.split(",");
+	var seafoodValue = (document.getElementById('seafood').value == "") ? 0 : document.getElementById('seafood').value;
+	var meatValue = (document.getElementById('meat').value == "") ? 0 : document.getElementById('meat').value;
+	var vegetableValue = (document.getElementById('vegetable').value == "") ? 0 : document.getElementById('vegetable').value;
+	var fruitValue = (document.getElementById('fruit').value == "") ? 0 : document.getElementById('fruit').value;
+	var othersValue = (document.getElementById('others').value == "") ? 0 : document.getElementById('others').value;
+	var orderDateValue = document.getElementById('orderDate').value;
+	var orderTime = document.getElementById('orderTime').value;
+	//marketTemp second element is marketId
+	var id = marketInfo[1];
+	var marketData;
+	xhrGet(MARKET_DATA +'?id=' +id, function(data){
+		console.log("data");
+		console.log(data);
+		if(data != null){
+			marketData = data;
+			console.log("marketData");
+			console.log(marketData);
+			
+			if(seafoodValue == 0 && meatValue == 0 && vegetableValue == 0 && fruitValue == 0 && othersValue == 0){
+				alert("You need to input at least one item!");
+				return;
+			}
+			
+			if(orderDateValue == "" || orderTime == ""){
+				alert("Please choose the available date and time!")
+				return;
+			}
+			console.log("I am here");
+			console.log(marketData);
+			console.log(marketData.latitude);
+			console.log(marketData.longitude);
+			
+			var newProduct = {
+				seafood : seafoodValue,
+				meat : meatValue,
+				vegetable : vegetableValue,
+				fruit : fruitValue,
+				others : othersValue,
+				marketId : id,
+				orderDate : orderDateValue + " " + orderTime,
+				srcLatitude : marketData.latitude, 
+				srcLongitude : marketData.longitude
+			};
+			console.log(newProduct);
+			xhrPost(PRODUCT_DATA, newProduct, function(){
+				console.log("Done updating product");
+				alert("Entry submitted, thank you for your contribution!");
+			}, function(err){
+				console.error(err);
+				alert("Updating donation failed....");
+			});
+		}
+		else{
+			alert("Market Information not found, please try again!");
+			
+		}
+			
+	});
 }
 
 loadMarket();

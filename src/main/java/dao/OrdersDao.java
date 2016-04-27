@@ -16,7 +16,6 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.json.JSONObject;
 
 
 // CRUD API at /api/todolist
@@ -36,27 +35,33 @@ public class OrdersDao {
 	}
 
 	@POST
-	public Response create(String input) {
+	public Response create(@FormParam("seafood") Integer seafood, 
+			@FormParam("meat") Integer meat,
+			@FormParam("vegetable") Integer vegetable,
+			@FormParam("fruit") Integer fruit,
+			@FormParam("others") Integer others,
+			@FormParam("marketId") Long marketId,
+			@FormParam("orderDate") String orderDate,
+			@FormParam("srcLatitude") Double srcLatitude,
+			@FormParam("srcLongitude") Double srcLongitude,
+			@FormParam("customerId") Long customerId,
+			@FormParam("destLatitude") Double destLatitude,
+			@FormParam("destLongitude") Double destLongitude
+			) {
 		Orders order = new Orders();
-
-		try{
-			JSONObject newInput = new JSONObject(input);
-			order.setSeafood(newInput.getInt("seafood"));
-			order.setMeat(newInput.getInt("meat"));
-			order.setVegetable(newInput.getInt("vegetable"));
-			order.setFruit(newInput.getInt("fruit"));
-			order.setOthers(newInput.getInt("others"));
-			order.setMarketId(newInput.getLong("marketId"));
-			order.setOrderDate(newInput.getString("orderDate"));
-			order.setSrcLatitude(newInput.getDouble("srcLatitude"));
-			order.setSrcLongitude(newInput.getDouble("srcLongitude"));
-			order.setCustomerId(newInput.getLong("customerId"));
-			order.setDestLatitude(newInput.getDouble("destLatitude"));
-			order.setDestLongitude(newInput.getDouble("destLongitude"));
-
-		}catch (Exception e){
-			e.printStackTrace();
-		}
+//		id, seafood, meat, vegetable, fruit, others, marketId, orderDate, srcLatitude, srcLongitude, customerId, destLatitude, destLongitude);
+		order.setSeafood(seafood);
+		order.setMeat(meat);
+		order.setVegetable(vegetable);
+		order.setFruit(fruit);
+		order.setOthers(others);
+		order.setMarketId(marketId);
+		order.setOrderDate(orderDate);
+		order.setSrcLatitude(srcLatitude);
+		order.setSrcLongitude(srcLongitude);
+		order.setCustomerId(customerId);
+		order.setDestLatitude(destLatitude);
+		order.setDestLongitude(destLongitude);
 		try {
 			utx.begin();
 			em.persist(order);
@@ -106,31 +111,37 @@ public class OrdersDao {
 	}
 
 	@PUT
-	public Response update(@FormParam("id") long id, String input) {
+	public Response update(@FormParam("id") long id, 
+			@FormParam("seafood") Integer seafood, 
+			@FormParam("meat") Integer meat,
+			@FormParam("vegetable") Integer vegetable,
+			@FormParam("fruit") Integer fruit,
+			@FormParam("others") Integer others,
+			@FormParam("marketId") Long marketId,
+			@FormParam("orderDate") String orderDate,
+			@FormParam("srcLatitude") Double srcLatitude,
+			@FormParam("srcLongitude") Double srcLongitude,
+			@FormParam("customerId") Long customerId,
+			@FormParam("destLatitude") Double destLatitude,
+			@FormParam("destLongitude") Double destLongitude) {
 		
 		try {
 			utx.begin();
 			Orders order = em.find(Orders.class, id);
 			if (order != null) {
 //				product.setName(name);// TODO check if null
-				try{
-					JSONObject newInput = new JSONObject(input);
-					order.setSeafood(newInput.getInt("seafood"));
-					order.setMeat(newInput.getInt("meat"));
-					order.setVegetable(newInput.getInt("vegetable"));
-					order.setFruit(newInput.getInt("fruit"));
-					order.setOthers(newInput.getInt("others"));
-					order.setMarketId(newInput.getLong("marketId"));
-					order.setOrderDate(newInput.getString("orderDate"));
-					order.setSrcLatitude(newInput.getDouble("srcLatitude"));
-					order.setSrcLongitude(newInput.getDouble("srcLongitude"));
-					order.setCustomerId(newInput.getLong("customerId"));
-					order.setDestLatitude(newInput.getDouble("destLatitude"));
-					order.setDestLongitude(newInput.getDouble("destLongitude"));
-
-				}catch (Exception e){
-					e.printStackTrace();
-				}
+				order.setSeafood(seafood);
+				order.setMeat(meat);
+				order.setVegetable(vegetable);
+				order.setFruit(fruit);
+				order.setOthers(others);
+				order.setMarketId(marketId);
+				order.setOrderDate(orderDate);
+				order.setSrcLatitude(srcLatitude);
+				order.setSrcLongitude(srcLongitude);
+				order.setCustomerId(customerId);
+				order.setDestLatitude(destLatitude);
+				order.setDestLongitude(destLongitude);
 				em.merge(order);
 				utx.commit();
 				return Response.ok().build();

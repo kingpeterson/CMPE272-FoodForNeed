@@ -1,85 +1,352 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>Request Food</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="viewport"
-	content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no" />
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="style.css" />
-<link rel="stylesheet" href="table.css" />
-<style>
-.marketList tr:hover .deleteBtn {
-	background: url('images/remove.png') no-repeat 3px;
-	cursor: pointer;
-	border-color: transparent;
-}
-</style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food for Need - Donate</title>
+    <!-- Core CSS - Include with every page -->
+    <link href="assets/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
+    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="assets/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <link href="assets/css/main-style.css" rel="stylesheet" />
 
-<!-- 
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJPap5AruRVqZwxDQBZ8cZoaIv-Nu-srY">
-</script>
-<script type="text/javascript">
-      function initialize() {
-        var mapOptions = {
-          center: { lat: 37.433, lng: -121.978},
-          zoom: 11
-        };
-        var map = new google.maps.Map(
-            document.getElementById('map-canvas'),
-            mapOptions);
-      }
-      google.maps.event.addDomListener(
-          window, 'load', initialize);
-</script>	
--->
+    <!-- Page-Level CSS -->
+    <link href="assets/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="assets/plugins/dataTables/select.dataTables.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="assets/plugins/timedropper.css">
+    
+
 </head>
-<body >
-	<div class = "fullPage">
-	<div class = "center">
-	<header>
-		<div class='title' id='Title Page'>
-			See what we have in the inventory! Starting giving TODAY!
-			
-		</div>
-	</header>
-	<table id='shelterList' class="container">
-	  <thead>
-	    <tr>
-	      <th><h1>Shelter Name</h1></th>
-	      <th><h1>Contact Name</h1></th>
-	      <th><h1>Phone</h1></th>
-	      <th><h1>Location</h1></th>
-	    </tr>
-	  </thead>
-	  <tbody>
-	  </tbody>
-	</table>
 
-	<footer>
-		<div class='tips'>
-			<a href="index.html" class="btn btn-info" role="button">Back</a>
-		</div>
-	</footer>
-				<!-- 
-				<table id='notes' class='records'><tbody></tbody></table>
-				<div id="loading">&nbsp;&nbsp;Please wait while the database is being initialized ...</div>
-				<footer>
-					<div class='tips'>
-						Click the Add button to add a record.
-						<button class='addBtn' onclick="addItem()" title='add record'>
-							<img src='images/add.png' alt='add' />
-						</button>
-					</div>
-				</footer> 
-				-->
-				<script type="text/javascript" src="util.js"></script> 
-				<script type="text/javascript" src="request.js"></script>
-	</div>
-					
-	</div>
+<body>
+    <!--  wrapper -->
+    <div id="wrapper">
+        <!-- navbar top -->
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" id="navbar">
+            <!-- navbar-header -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="index.html">
+                    <img src="assets/img/logo.png" alt="" />
+                </a>
+            </div>
+            <!-- end navbar-header -->
+        
+        </nav>
+        <!-- end navbar top -->
+
+        <!-- navbar side -->
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <!-- sidebar-collapse -->
+            <div class="sidebar-collapse">
+                <!-- side-menu -->
+                <ul class="nav" id="side-menu">
+                    <li class="">
+                        <a href="index.html"><i class="fa fa-bullhorn"></i>Bulletin</a>
+                    </li>
+                    
+                    <li>
+                        <a href="donate.html"><i class="fa fa-shopping-cart"></i> Giveaway</a>
+                    </li>
+                    <li>
+                        <a href="request.html"><i class="fa fa-truck"></i> Request</a>
+                    </li>
+
+                </ul>
+                <!-- end side-menu -->
+            </div>
+            <!-- end sidebar-collapse -->
+        </nav>
+        <!-- end navbar side -->
+        <!--  page-wrapper -->
+        <div id="page-wrapper">
+
+            
+            <div class="row">
+                 <!--  page header -->
+                <div class="col-lg-12">
+                    <h1 class="page-header">Start giving away today! Anything Counts!</h1>
+                </div>
+                 <!-- end  page header -->
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- Advanced Tables -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                             Shelter List
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table" id="shelterList">
+                                    <thead>
+                                        <tr>
+                                          <th></th>
+                                          <th>ID</th>
+									      <th>Shelter Name</th>
+									      <th>Contact Name</th>
+									      <th>Phone</th>
+									      <th>Location</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>  
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <!--End Shelter List Tables -->
+                </div>
+            </div>
+            
+            <div class="row" id="donateTable" style="display:none;">
+                <div class="col-lg-12">
+                    <!-- Advanced Tables -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                             Donation List
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table" id="productList">
+                                    <thead>
+                                        <tr>
+                                          <th></th>
+                                          <th>ID</th>
+									      <th>Seafood (lb)</th>
+									      <th>Meat (lb)</th>
+									      <th>Vegetable (lb)</th>
+									      <th>Fruit (lb)</th>
+									      <th>Others (lb)</th>
+									      <th>Available Time</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>  
+                                    </tbody>
+                                </table>
+                            </div>
+                        	<button type="button" class="btn btn-primary" id="submitOrder">Submit</button>
+                        	    
+                        </div>
+                    </div>
+                    <!--End Donate List Tables -->
+                </div>
+            </div>
+            
+        </div>
+        <!-- end page-wrapper -->
+
+    </div>
+    <!-- end wrapper -->
+    <script type="text/javascript" src="util.js"></script> 
+    <script type="text/javascript" src="request.js"></script>
+    
+    <!-- Core Scripts - Include with every page -->
+    <script src="assets/plugins/jquery-1.10.2.js"></script>
+    <script src="assets/plugins/bootstrap/bootstrap.min.js"></script>
+    <script src="assets/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="assets/plugins/pace/pace.js"></script>
+    <script src="assets/scripts/siminta.js"></script>
+    <!-- Page-Level Plugin Scripts-->
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyAJPap5AruRVqZwxDQBZ8cZoaIv-Nu-srY"></script>
+    <script src="assets/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="assets/plugins/dataTables/dataTables.select.min.js"></script> 
+	<script src="assets/plugins/dataTables/dataTables.bootstrap.js"></script>
+	<script src="assets/plugins/timedropper.js"></script>
+    <script>
+   		var CUSTOMERS_DATA = 'api//customersDao';
+   		var ORDER_DATA = 'api//ordersDao';
+   		var PRODUCT_DATA = 'api//productsDao';
+
+		/*
+		var geocoder = new google.maps.Geocoder();
+		var latitude = item.srcLatitude;
+		var longitude = item.srcLongitude;
+		var latLng = new google.maps.LatLng(latitude,longitude);
+		var location;
+		geocoder.geocode({       
+		        latLng: latLng     
+		        }, 
+		        function(responses) 
+		        {     
+		           if (responses && responses.length > 0) 
+		           {        
+		               location = responses[0].formatted_address;     
+		           } 
+		           else 
+		           {       
+		             console.log('Not getting Any address for given latitude and longitude.');     
+		           }   
+		        }
+		);*/
+
+    
+    	function loadTable(){
+    		var table = $('#shelterList').DataTable({     
+            	columnDefs: [ {
+	                orderable: false,
+	                className: 'select-checkbox',
+	                targets:   0
+            	} ],
+            	select: {
+                	style:    'os',
+                	selector: 'td:first-child'
+            	},
+            	oTableTools: {
+            		"sRowSelect": "single"
+            	},
+            	order: [[ 1, 'asc' ]]
+        	});
+    		
+    		var productTable = $('#productList').DataTable({     
+            	columnDefs: [ {
+	                orderable: false,
+	                className: 'select-checkbox',
+	                targets:   0
+            	} ],
+            	select: {
+                	style:    'os',
+                	selector: 'td:first-child'
+            	},
+            	order: [[ 1, 'asc' ]]
+        	});
+            
+    		$('#shelterList tbody').on('click', 'tr', function(e){
+            	$(this).toggleClass('selected');
+                if($("#donateTable:visible").length){
+                	$("#donateTable").hide();
+                    e.preventDefault();
+                }
+                else{
+                	$("#donateTable").show();
+                    e.preventDefault();
+                }
+                if(typeof(Storage) !== "undefined")
+               		localStorage.setItem("shelterInfo", table.row('.selected').data());
+               	else
+               		alert("storage not available");
+            });
+    		
+        	var productData = [];
+
+    		$('#productList tbody').on('click', 'tr', function(e){
+            	$(this).toggleClass('selected');
+            	for(var i = 0; i < productTable.rows('.selected').data().length; ++i){
+            		productData[i] = productTable.rows('.selected').data()[i];
+            	}
+                if(typeof(Storage) !== "undefined")
+               		localStorage.setItem("orderInfo", productData);
+               	else
+               		alert("storage not available");
+            });
+    		
+    		var shelterData;
+    		
+    		$('#submitOrder').click(function(){
+    			var shelterTemp = localStorage.getItem("shelterInfo");
+    			var shelterInfo = shelterTemp.split(",");
+    			var customerId = shelterInfo[1];
+    			console.log("shelterTemp");
+    			console.log(shelterTemp);
+
+    			console.log("customerId");
+    			console.log(customerId);
+    			console.log("productData.length");
+    			console.log(productData.length);
+    			for(var j = 0; j < productData.length; j++){
+    				console.log("productData"+j);
+    				console.log(productData[j]);
+    				console.log(productData[j][0]);
+    				console.log(productData[j][1]);
+    				console.log(productData[j][2]);
+
+
+    			}
+
+
+    			xhrGet(CUSTOMERS_DATA +'?id=' +customerId, function(data){
+    				console.log("data");
+    				console.log(data);
+    				if(data != null){
+    					shelterData = data;
+    					console.log("shelterData");
+    					console.log(shelterData);
+    					for(var count = 0; count < productData.length; count++){
+    						console.log("productData[count]");
+    						console.log(productData[count]);
+//id, seafood, meat, vegetable, fruit, others, marketId, orderDate, srcLatitude, srcLongitude);
+
+//id, seafood, meat, vegetable, fruit, others, marketId, orderDate, srcLatitude, srcLongitude, customerId, destLatitude, destLongitude);
+							var productId = productData[count][1];
+    						console.log("productId");
+    						console.log(productId);
+    						xhrGet(PRODUCT_DATA +'?id=' +productId, function(product){
+								console.log("product");
+								console.log(product);
+								if(product != null){
+		    						var orderData = {
+	        							seafood: product.seafood,
+	        							meat: product.meat,
+	        							vegetable: product.vegetable,
+	        							fruit: product.fruit,
+	        							others: product.others,
+	        							marketId: product.marketId,
+	        							orderDate: product.orderDate,
+	        							srcLatitude: product.srcLatitude,
+	        							srcLongitude: product.srcLongitude,
+	        							customerId: customerId,
+	        							destLatitude: shelterData.latitude,
+	        							destLongitude: shelterData.longitude
+	        						};
+		    						console.log("orderData");
+		    						console.log(orderData);
+									
+	        						xhrPost(ORDER_DATA, orderData, function(){
+	        							console.log("Done updating order");
+	        						}, function(err){
+	        							console.error(err);
+	        							alert("Placing order failed....");
+	        						});
+	        						
+        							console.log("I am about to delete");
+	        						console.log("productId before delete");
+	        						console.log(product.id);
+	        						xhrDelete(PRODUCT_DATA + '?id=' + product.id, function(){
+	        							productTable.rows('.selected').remove().draw(false);
+	        							console.log("Deleting product success");
+	        							alert("Order placed!");
+	        						}, function(err){
+	        							console.error(err);
+	        						});
+	        							
+	        						
+								}
+								else
+			    					alert("Product Information not found, please try again!");
+							});
+    					}
+    				}
+    				else{
+    					alert("Shelter Information not found, please try again!");
+    					
+    				}
+    			});
+
+    		});
+        
+    	}
+    	
+        $(document).ready(function () {
+        	setTimeout(function(){
+        		loadTable();
+        	}, 1000);	
+        });
+        
+    </script>
+<!-- 	<script>$( "#orderTime" ).timeDropper();</script>
+ -->
 </body>
+
 </html>
