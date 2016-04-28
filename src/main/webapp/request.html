@@ -169,27 +169,30 @@
         var srcLong = 0;
         var dstLat = 0;
         var dstLong = 0;
-		/*
-		var geocoder = new google.maps.Geocoder();
-		var latitude = item.srcLatitude;
-		var longitude = item.srcLongitude;
-		var latLng = new google.maps.LatLng(latitude,longitude);
-		var location;
-		geocoder.geocode({       
-		        latLng: latLng     
-		        }, 
-		        function(responses) 
-		        {     
-		           if (responses && responses.length > 0) 
-		           {        
-		               location = responses[0].formatted_address;     
-		           } 
-		           else 
-		           {       
-		             console.log('Not getting Any address for given latitude and longitude.');     
-		           }   
-		        }
-		);*/
+        var coords = 0;
+        var mapcanvas = document.createElement('div');
+        mapcanvas.id = 'mapcontainer';
+        mapcanvas.style.height = '440px';
+        mapcanvas.style.width = '965px';
+        document.querySelector('article').appendChild(mapcanvas);
+
+        var options = {
+            zoom: 17,
+            center: new google.maps.LatLng(37.322932, -121.811920),
+            mapTypeControl: false,
+            navigationControlOptions: {
+                style: google.maps.NavigationControlStyle.SMALL
+            },
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+          var map = new google.maps.Map(document.getElementById("mapcontainer"), options);
+        
+           var marker = new google.maps.Marker({
+              position: new google.maps.LatLng(37.322932, -121.811920),
+              map: map,
+        });
+
+        marker.setMap(map);
 
     
     	function loadTable(){
@@ -316,6 +319,26 @@
                                      srcLong = product.srcLongitude;
                                      dstLat = shelterData.latitude;
                                      dstLong = shelterData.longitude;
+
+                                       var directionsDisplay = new google.maps.DirectionsRenderer();
+                                       var directionsService = new google.maps.DirectionsService();
+                                     
+                                         //var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+                                         directionsDisplay.setMap(map);
+                                     
+                                         var request = {
+                                           origin: new google.maps.LatLng(srcLat, srcLong),
+                                           destination: new google.maps.LatLng(dstLat, dstLong),
+                                           travelMode: google.maps.TravelMode.WALKING
+                                         };
+                                     
+                                         directionsService.route(request, function(response, status) {
+                                          console.debug(response);
+                                           if (status == google.maps.DirectionsStatus.OK) {
+                                              directionsDisplay.setDirections(response);
+                                           }
+                                         });                
+
 	        						xhrPost(ORDER_DATA, orderData, function(){
 	        							console.log("Done updating order");
 	        						}, function(err){
@@ -354,32 +377,6 @@
               var items = [];
               var i;
               var markers=[];
-              var mapcanvas = document.createElement('div');
-              mapcanvas.id = 'mapcontainer';
-              mapcanvas.style.height = '440px';
-              mapcanvas.style.width = '965px';
-        
-              document.querySelector('article').appendChild(mapcanvas);
-              var coords = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-              
-              var options = {
-                zoom: 17,
-                center: coords,
-                mapTypeControl: false,
-                navigationControlOptions: {
-                    style: google.maps.NavigationControlStyle.SMALL
-                },
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-              };
-              var map = new google.maps.Map(document.getElementById("mapcontainer"), options);
-            
-               var marker = new google.maps.Marker({
-                  position: coords,
-                  map: map,
-              });
-
-
-
 
                var directionsDisplay = new google.maps.DirectionsRenderer();
                var directionsService = new google.maps.DirectionsService();
@@ -388,8 +385,8 @@
                  directionsDisplay.setMap(map);
              
                  var request = {
-                   origin: new google.maps.LatLng(srcLat, srcLong),
-                   destination: new google.maps.LatLng(dstLat, dstLong),
+                   origin: coords,
+                   destination: new google.maps.LatLng(37.322932, -121.811920),
                    travelMode: google.maps.TravelMode.WALKING
                  };
              
@@ -444,11 +441,6 @@
             });
 
             //markerCluster.addMarkers(markers,true);
-        }
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(success);
-        } else {
-          error('Geo Location is not supported');
         }
         $(document).ready(function () {
         	setTimeout(function(){
