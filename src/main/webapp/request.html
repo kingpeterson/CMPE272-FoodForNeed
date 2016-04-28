@@ -165,7 +165,10 @@
    		var CUSTOMERS_DATA = 'api//customersDao';
    		var ORDER_DATA = 'api//ordersDao';
    		var PRODUCT_DATA = 'api//productsDao';
-
+        var srcLat = 0;
+        var srcLong = 0;
+        var dstLat = 0;
+        var dstLong = 0;
 		/*
 		var geocoder = new google.maps.Geocoder();
 		var latitude = item.srcLatitude;
@@ -309,6 +312,10 @@
 		    						console.log("orderData");
 		    						console.log(orderData);
 									
+                                     srcLat = product.srcLatitude;
+                                     srcLong = product.srcLongitude;
+                                     dstLat = shelterData.latitude;
+                                     dstLong = shelterData.longitude;
 	        						xhrPost(ORDER_DATA, orderData, function(){
 	        							console.log("Done updating order");
 	        						}, function(err){
@@ -350,7 +357,7 @@
               var mapcanvas = document.createElement('div');
               mapcanvas.id = 'mapcontainer';
               mapcanvas.style.height = '440px';
-              mapcanvas.style.width = '660px';
+              mapcanvas.style.width = '965px';
         
               document.querySelector('article').appendChild(mapcanvas);
               var coords = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
@@ -369,54 +376,74 @@
                var marker = new google.maps.Marker({
                   position: coords,
                   map: map,
-                  //title:"You are here!"
               });
+
+
+
+
+               var directionsDisplay = new google.maps.DirectionsRenderer();
+               var directionsService = new google.maps.DirectionsService();
+             
+                 //var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+                 directionsDisplay.setMap(map);
+             
+                 var request = {
+                   origin: new google.maps.LatLng(srcLat, srcLong),
+                   destination: new google.maps.LatLng(dstLat, dstLong),
+                   travelMode: google.maps.TravelMode.WALKING
+                 };
+             
+                 directionsService.route(request, function(response, status) {
+                  console.debug(response);
+                   if (status == google.maps.DirectionsStatus.OK) {
+                      directionsDisplay.setDirections(response);
+                   }
+                 });
+
               var infowindow = new google.maps.InfoWindow();
               var contentString = '<span class="blue"><p><b>Your Location</p><p>Free Food: xxx lbs</p><p>Available Time: PM7, May 1</p></span>'
               infowindow.setContent(contentString);
-              google.maps.event.addListener(marker, 'mouseover', function() {
+           /*   google.maps.event.addListener(marker, 'mouseover', function() {
                  infowindow.open(map, marker);
-              });
-              markers.push(marker);
+              });*/
+              //markers.push(marker);
               var mcOptions = {gridSize: 50, maxZoom: 17};
-              var markerCluster = new MarkerClusterer(map, markers, mcOptions);
+             // var markerCluster = new MarkerClusterer(map, markers, mcOptions);
               
               //get from db
-            xhrGet(REST_DATA, function(data){
+            xhrGet(PRODUCT_DATA, function(data){
                 // Make sure the received items have correct format
                 var receivedItems = data.body || [];
                 console.log(receivedItems);
                 for(i = 0; i < receivedItems.length; ++i){
                     var item = receivedItems[i];
-                    if(item && 'id' in item && 'name' in item){
-                        items.push(item);
-                    }
+                    items.push(item);
                 }
                 for(i = 0; i < items.length; ++i){
                     console.log(items[i]);
                     //addItemIntoGmap(items[i], false);
-                    var location = new google.maps.LatLng(items[i].latitude, items[i].longitude);
+                    var location = new google.maps.LatLng(items[i].srcLatitude, items[i].srcLongitude);
 
                     var storemarker = new google.maps.Marker({
                           position: location,
                           map: map,
                           //title:"You are here!"
                       });
-                    markers.push(storemarker);
-                     /* var infowindow = new google.maps.InfoWindow();
-                      var contentString = '<span class="blue"><p>'+items[i].name+'</p></span>'
+                   // markers.push(storemarker);
+                    var infowindow = new google.maps.InfoWindow();
+                    var contentString = '<span class="blue"><p>'+items[i].orderDate+'</p></span>'
                       //'<b>Your Location</p><p>Free Food: xxx lbs</p><p>Available Time: PM7, May 1</p></span>'
                       infowindow.setContent(contentString);
                       google.maps.event.addListener(storemarker, 'mouseover', function() {
                          infowindow.open(map, storemarker);
                       });
-                      storemarker.setMap(map);*/
+                    storemarker.setMap(map);
                 }
             }, function(err){
                 console.error(err);
             });
 
-            markerCluster.addMarkers(markers,true);
+            //markerCluster.addMarkers(markers,true);
         }
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(success);
