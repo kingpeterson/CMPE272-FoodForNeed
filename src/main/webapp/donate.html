@@ -178,72 +178,7 @@
     <script src="assets/plugins/dataTables/dataTables.select.min.js"></script> 
 	<script src="assets/plugins/dataTables/dataTables.bootstrap.js"></script>
 	<script src="assets/plugins/timedropper.js"></script>
-    <script>
-    	var PRODUCT_DATA = 'api//productsDao';
-    	var MARKET_DATA = 'api//marketDao';
-		/*
-		function submitProduct(){
-       		var marketTemp = localStorage.getItem("marketInfo");
-       		var marketInfo = marketTemp.split(",");
-			var seafoodValue = (document.getElementById('seafood').value == "") ? 0 : document.getElementById('seafood').value;
-			var meatValue = (document.getElementById('meat').value == "") ? 0 : document.getElementById('meat').value;
-			var vegetableValue = (document.getElementById('vegetable').value == "") ? 0 : document.getElementById('vegetable').value;
-			var fruitValue = (document.getElementById('fruit').value == "") ? 0 : document.getElementById('fruit').value;
-			var othersValue = (document.getElementById('others').value == "") ? 0 : document.getElementById('others').value;
-			var orderDateValue = document.getElementById('orderDate').value;
-			var orderTime = document.getElementById('orderTime').value;
-			var id = marketInfo[1];
-			var marketData;
-			xhrGet(MARKET_DATA +'?id=' +id, function(data){
-				console.log("data");
-				console.log(data);
-				if(data != null){
-					marketData = data;
-					console.log("marketData");
-					console.log(marketData);
-					
-					if(seafoodValue == 0 && meatValue == 0 && vegetableValue == 0 && fruitValue == 0 && othersValue == 0){
-						alert("You need to input at least one item!");
-						return;
-					}
-					
-					if(orderDateValue == "" || orderTime == ""){
-						alert("Please choose the available date and time!")
-						return;
-					}
-					console.log("I am here");
-					console.log(marketData);
-					console.log(marketData.latitude);
-					console.log(marketData.longitude);
-					
-					var newProduct = {
-						seafood : seafoodValue,
-						meat : meatValue,
-						vegetable : vegetableValue,
-						fruit : fruitValue,
-						others : othersValue,
-						marketId : id,
-						orderDate : orderDateValue + " " + orderTime,
-						srcLatitude : marketData.latitude, 
-						srcLongitude : marketData.longitude
-					};
-					console.log(newProduct);
-					xhrPost(PRODUCT_DATA, newProduct, function(){
-						console.log("Done updating product");
-						alert("Entry submitted, thank you for your contribution!");
-					}, function(err){
-						console.error(err);
-						alert("Add donation failed...");
-					});
-				}
-				else{
-					alert("Market Information not found, please try again!");
-					
-				}
-					
-			});
-		}*/
-    
+    <script>    
     	function loadTable(){
     		var table = $('#marketList').DataTable({     
             	columnDefs: [ {
@@ -255,7 +190,7 @@
                 	style:    'os',
                 	selector: 'td:first-child'
             	},
-            	oTableTools: {
+            	tableTools: {
             		"sRowSelect": "single"
             	},
             	order: [[ 1, 'asc' ]]

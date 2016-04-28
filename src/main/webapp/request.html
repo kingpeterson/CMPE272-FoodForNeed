@@ -248,10 +248,6 @@
             	for(var i = 0; i < productTable.rows('.selected').data().length; ++i){
             		productData[i] = productTable.rows('.selected').data()[i];
             	}
-                if(typeof(Storage) !== "undefined")
-               		localStorage.setItem("orderInfo", productData);
-               	else
-               		alert("storage not available");
             });
     		
     		var shelterData;
@@ -352,7 +348,6 @@
 	        						xhrDelete(PRODUCT_DATA + '?id=' + product.id, function(){
 	        							productTable.rows('.selected').remove().draw(false);
 	        							console.log("Deleting product success");
-	        							alert("Order placed!");
 	        						}, function(err){
 	        							console.error(err);
 	        						});
@@ -369,9 +364,10 @@
     					
     				}
     			});
+    			alert("Order placed!");
 
     		});
-        
+
     	}
     	function success() {
               var items = [];
@@ -430,8 +426,7 @@
         });
         
     </script>
-<!-- 	<script>$( "#orderTime" ).timeDropper();</script>
- -->
+
 </body>
 
 </html>
