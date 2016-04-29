@@ -71,6 +71,7 @@
                     <h1 class="page-header">Start giving away today! Anything Counts!</h1>
                 </div>
                 <div class="panel-body">
+                    <div id="right-panel"></div>
                     <article></article>                        
                 </div>
                  <!-- end  page header -->
@@ -176,9 +177,12 @@
         mapcanvas.style.width = '965px';
         document.querySelector('article').appendChild(mapcanvas);
 
+
+        
+
         var options = {
             zoom: 17,
-            center: new google.maps.LatLng(37.322932, -121.811920),
+            center: new google.maps.LatLng(37.3366347,-121.8818316),
             mapTypeControl: false,
             navigationControlOptions: {
                 style: google.maps.NavigationControlStyle.SMALL
@@ -188,7 +192,7 @@
           var map = new google.maps.Map(document.getElementById("mapcontainer"), options);
         
            var marker = new google.maps.Marker({
-              position: new google.maps.LatLng(37.322932, -121.811920),
+              position: new google.maps.LatLng(37.3366347,-121.8818316),
               map: map,
         });
 
@@ -321,11 +325,12 @@
                                  
                                      //var map = new google.maps.Map(document.getElementById('map'), mapOptions);
                                      directionsDisplay.setMap(map);
-                                 
+                                     directionsDisplay.setPanel(document.getElementById('right-panel'));
+
                                      var request = {
                                        origin: new google.maps.LatLng(srcLat, srcLong),
                                        destination: new google.maps.LatLng(dstLat, dstLong),
-                                       travelMode: google.maps.TravelMode.WALKING
+                                       travelMode: google.maps.TravelMode.DRIVING
                                      };
                                  
                                      directionsService.route(request, function(response, status) {
