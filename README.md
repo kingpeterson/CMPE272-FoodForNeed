@@ -34,11 +34,14 @@ See `src/main/webapp/WEB-INF/donate.html`, `src/main/webapp/WEB-INF/donate.js` a
 See `src/main/webapp/WEB-INF/request.html`, `src/main/webapp/WEB-INF/request.js` and `src/main/webapp/WEB-INF/util.js` for the front-end UI calling the back-end API of the food requesting page.
 
 Main Page:
+
 https://www.dropbox.com/s/7l2ppyr1vpa0vp4/Screen%20Shot%202016-05-04%20at%2010.40.00%20AM.png?dl=0
 
 Donate Page:
+
 https://www.dropbox.com/s/d3rkyo6ic3s1ue2/Screen%20Shot%202016-05-04%20at%2010.39.33%20AM.png?dl=0
 
 Request Page:
+
 https://www.dropbox.com/s/6bicdhixemqev0g/Screen%20Shot%202016-05-04%20at%2010.39.51%20AM.png?dl=0
 
