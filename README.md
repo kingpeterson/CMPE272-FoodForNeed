@@ -10,8 +10,11 @@ The webpage is implemented in Html and Javascript with jQuery library to provide
 **API - JAX-RS Resource**
 
 See `src/main/java/dao/CustomersDao.java` for the customers object CRUD API and obtaining the EntityManager.
+
 See `src/main/java/dao/MarketDao.java` for the market object CRUD API and obtaining the EntityManager.
+
 See `src/main/java/dao/OrdersDao.java` for the orders object CRUD API and obtaining the EntityManager.
+
 See `src/main/java/dao/ProductsDao.java` for the products object CRUD API and obtaining the EntityManager.
 
 
