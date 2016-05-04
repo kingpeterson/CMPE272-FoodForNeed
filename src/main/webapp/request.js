@@ -1,5 +1,7 @@
 var CUSTOMERS_DATA = 'api//customersDao';
 var PRODUCT_DATA = 'api//productsDao';
+var MARKET_DATA = 'api//marketDao';
+
 
 function loadCustomers(){
 	xhrGet(CUSTOMERS_DATA, function(data){
@@ -109,6 +111,8 @@ function addProducts(item, isNew){
 					"<td id=vegetable"+id+"></td>"+
 					"<td id=fruit"+id+"></td>" +
 					"<td id=others"+id+"></td>" +
+					"<td id=marketId"+id+"></td>" +
+					"<td id=marketName"+id+"></td>" +
 					"<td id=orderDate"+id+"></td>";
 
 //    				"<button class='deleteBtn' onclick='deleteItem(this)' title='delete me'></button>";
@@ -125,7 +129,12 @@ function addProducts(item, isNew){
 		document.getElementById('fruit'+id).innerHTML = item.fruit;
 		document.getElementById('others'+id).innerHTML = item.others;
 		document.getElementById('orderDate'+id).innerHTML = item.orderDate;
-
+		xhrGet(MARKET_DATA +'?id=' +item.marketId, function(data){
+			document.getElementById('marketId'+id).innerHTML = data.id;
+			document.getElementById('marketName'+id).innerHTML = data.name;	
+		}, function(err){
+			console.error(err);
+		});
 
 		
 
